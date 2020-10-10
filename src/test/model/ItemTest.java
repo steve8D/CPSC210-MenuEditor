@@ -1,5 +1,6 @@
 package model;
 
+import model.item.BakedGoods;
 import model.item.Drinks;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -8,18 +9,28 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ItemTest {
     Drinks coffee;
+    BakedGoods tiramisu;
 
     @BeforeEach
     public void setUp() {
         coffee = new Drinks("Iced Coffee", 2.5, 50);
+        tiramisu = new BakedGoods("Tiramisu", 1, 50);
     }
 
     @Test
-    public void testConstructor() {
+    public void testConstructorDrinks() {
         assertEquals(2.5, coffee.getPrice());
         assertEquals("Iced Coffee", coffee.getName());
         assertEquals(50, coffee.getQuantity());
     }
+
+    @Test
+    public void testConstructorBakedGoods() {
+        assertEquals(1, tiramisu.getPrice());
+        assertEquals("Tiramisu", tiramisu.getName());
+        assertEquals(50, tiramisu.getQuantity());
+    }
+
 
     @Test
     public void testConstructorNegative() {
