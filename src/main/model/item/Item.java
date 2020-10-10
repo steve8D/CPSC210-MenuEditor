@@ -1,6 +1,4 @@
-package model;
-
-import java.util.ArrayList;
+package model.item;
 
 public abstract class Item {
     private double price;
@@ -37,10 +35,18 @@ public abstract class Item {
         return name;
     }
 
+    // EFFECTS: returns the quantity of the item
+    public int getQuantity() {
+        return quantity;
+    }
+
+    // REQUIRES: quantity >= 0
     // MODIFIES: this
-    // EFFECTS: changes the name of the item on the menu
-    public void setName(String name) {
-        this.name = name;
+    // EFFECTS: set the quantity of the item on the menu
+    public void setQuantity(int quantity) {
+        if (quantity >= 0) {
+            this.quantity = quantity;
+        }
     }
 
     // EFFECTS: returns true if the item's quantity is equal to zero, other wise returns false.

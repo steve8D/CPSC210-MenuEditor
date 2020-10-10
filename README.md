@@ -9,8 +9,8 @@ on the application.
 
 With this application, as a manager/shop owner, you can:
 
-- Add, edit, and remove items
-- Set prices to items on the menu
+- Add and remove items
+- Edit prices and quantity to items on the menu
 
 As a customer, the person can: 
 

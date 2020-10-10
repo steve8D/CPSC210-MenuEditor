@@ -1,6 +1,6 @@
 package model;
 
-import model.Item;
+import model.item.Item;
 
 import java.util.ArrayList;
 
@@ -13,11 +13,13 @@ public class ShoppingCart {
         shoppingCart = new ArrayList<>();
     }
 
-    // REQUIRES: Item i exists in the menu
+    // REQUIRES: Item i exists in the menu and is in stock
     // MODIFIES: this
     // EFFECTS: adds Item i to the shopping cart
     public void addItem(Item i) {
-        shoppingCart.add(i);
+        if (!i.isOutOfStock()) {
+            shoppingCart.add(i);
+        }
     }
 
     public void removeItem(Item i) {

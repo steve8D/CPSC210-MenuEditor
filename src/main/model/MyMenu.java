@@ -1,6 +1,6 @@
 package model;
 
-import model.Item;
+import model.item.Item;
 
 import java.util.ArrayList;
 import java.util.List;
