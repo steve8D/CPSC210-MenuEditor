@@ -7,13 +7,17 @@ import java.util.ArrayList;
 public class ShoppingCart {
     ArrayList<Item> shoppingCart;
 
-
     // EFFECTS: initialize a shopping cart
     public ShoppingCart() {
         shoppingCart = new ArrayList<>();
     }
 
-    // REQUIRES: Item i exists in the menu and is in stock
+    // EFFECTS: returns the number of items in the shopping cart
+    public int getNumberOfItems() {
+        return shoppingCart.size();
+    }
+
+    // REQUIRES: Item i is in stock
     // MODIFIES: this
     // EFFECTS: adds Item i to the shopping cart
     public void addItem(Item i) {
@@ -22,14 +26,18 @@ public class ShoppingCart {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: remove Item i from the shopping cart
     public void removeItem(Item i) {
         shoppingCart.remove(i);
     }
 
-    public void totalPrice() {
+    // EFFECTS: returns the total price of the items in the shopping cart
+    public int totalPrice() {
         int totalPrice = 0;
         for (Item i: shoppingCart) {
             totalPrice += i.getPrice();
         }
+        return totalPrice;
     }
 }
