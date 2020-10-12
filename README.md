@@ -19,5 +19,6 @@ As a customer, the person can:
 
 ## User Stories
 - As a user (both manager and customer), I want to be able to view the items in different categories on the menu
-- As a manager/shop owner, I want to be able to modify the items and its attributes on my menu.
-- As a customer, I want to be able to select the items in different categories and add it to my order list
+- As a manager/shop owner, I want to be able to add or remove the items on my menu
+- As a manager/shop owner, I want to be able modify an item's price and quantity on my menu.
+- As a customer, I want to be able to select the items in different categories and add it to my order list.

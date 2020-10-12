@@ -18,18 +18,20 @@ public class ShoppingCart {
     }
 
     // REQUIRES: Item i is in stock
-    // MODIFIES: this
-    // EFFECTS: adds Item i to the shopping cart
+    // MODIFIES: this and Item
+    // EFFECTS: adds Item i to the shopping cart and deduct one item from quantity of Item i
     public void addItem(Item i) {
         if (!i.isOutOfStock()) {
             shoppingCart.add(i);
+            i.setQuantity(i.getQuantity() - 1);
         }
     }
 
-    // MODIFIES: this
-    // EFFECTS: remove Item i from the shopping cart
+    // MODIFIES: this and Item
+    // EFFECTS: remove Item i from the shopping cart and adds one item into quantity of Item i
     public void removeItem(Item i) {
         shoppingCart.remove(i);
+        i.setQuantity(i.getQuantity() + 1);
     }
 
     // EFFECTS: returns the total price of the items in the shopping cart

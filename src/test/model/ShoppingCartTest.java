@@ -30,6 +30,8 @@ public class ShoppingCartTest {
         checkOut.addItem(brownSugarMilkTea);
         checkOut.addItem(brownSugarMilkTea);
         assertEquals(3, checkOut.getNumberOfItems());
+        assertEquals(49, croissant.getQuantity());
+        assertEquals(18, brownSugarMilkTea.getQuantity());
     }
 
     @Test
@@ -52,6 +54,7 @@ public class ShoppingCartTest {
         // remove the milk tea because customer added one extra by mistake
         checkOut.removeItem(brownSugarMilkTea);
         assertEquals(2, checkOut.getNumberOfItems());
+        assertEquals(19, brownSugarMilkTea.getQuantity());
     }
 
     @Test

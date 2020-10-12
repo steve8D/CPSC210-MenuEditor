@@ -2,15 +2,14 @@ package model;
 
 import model.item.BakedGoods;
 import model.item.Drinks;
-import model.item.Item;
 
 import java.util.ArrayList;
 
 public class MyMenu {
 
 
-    private ArrayList<Item> drinks;
-    private ArrayList<Item> bakedGoods;
+    private ArrayList<Drinks> drinks;
+    private ArrayList<BakedGoods> bakedGoods;
 
     // EFFECTS: construct a list of items on the menu
     public MyMenu() {
@@ -19,12 +18,12 @@ public class MyMenu {
     }
 
     // EFFECTS: return the items in the drink section on the menu
-    public ArrayList<Item> getDrinks() {
+    public ArrayList<Drinks> getDrinks() {
         return drinks;
     }
 
     // EFFECTS: return the items in the baked goods section on the menu
-    public ArrayList<Item> getBakedGoods() {
+    public ArrayList<BakedGoods> getBakedGoods() {
         return bakedGoods;
     }
 
