@@ -24,7 +24,7 @@ public abstract class Item {
     // REQUIRES: price > 0
     // MODIFIES: this
     // EFFECTS: sets item to price
-    public void setPrice(int price) {
+    public void setPrice(double price) {
         if (price > 0) {
             this.price = price;
         }

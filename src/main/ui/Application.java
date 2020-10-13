@@ -19,10 +19,10 @@ public class Application {
 
         if (user.equals("1")) {
             OwnerInterface ownerInterface = new OwnerInterface();
-            ownerInterface.handleInput();
+            ownerInterface.loadOwnerInterface();
         } else if (user.equals("2")) {
             CustomerInterface customerInterface = new CustomerInterface();
-            customerInterface.handleInput();
+            customerInterface.loadCustomerInterface();
         }
     }
 }

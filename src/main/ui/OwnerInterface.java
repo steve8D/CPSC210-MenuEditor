@@ -19,28 +19,10 @@ public class OwnerInterface {
     }
 
     // EFFECTS: print instructions and handle user input
-    public void handleInput() {
+    public void loadOwnerInterface() {
         while (runProgram) {
-            System.out.println("Enter 1 to add an item to the menu\n"
-                    +    "Enter 2 to view the menu\n"
-                    +    "Enter 3 to remove an item from the menu\n"
-                    +    "Enter 4 to quit the program");
-            user = in.nextLine();
-            switch (user) {
-                case "1":
-                    addItem();
-                    break;
-                case "2":
-                    getItem();
-                    break;
-                case "3":
-                    removeItem();
-                    break;
-                case "4":
-                    System.out.println("Have a good day!");
-                    runProgram = false;
-                    break;
-            }
+            printInstructions();
+            handleInput();
         }
     }
 
@@ -56,7 +38,7 @@ public class OwnerInterface {
     }
 
     // MODIFIES: this
-    // EFFECTS: remove a drink item from the menu
+    // EFFECTS: add a drink item to the menu
     public void addBakedGoods() {
         System.out.println("Please enter the name of the item: ");
         String name = in.nextLine();
@@ -69,7 +51,7 @@ public class OwnerInterface {
     }
 
     // MODIFIES: this
-    // EFFECTS: remove a baked goods item from the menu
+    // EFFECTS: add a baked goods item to the menu
     public void addDrink() {
         System.out.println("Please enter the name of the item: ");
         String name = in.nextLine();
@@ -116,7 +98,11 @@ public class OwnerInterface {
                 remove = bakedGoods;
             }
         }
-        menu.removeBakedGoods(remove);
+        if (remove == null) {
+            System.out.println("Cannot find baked goods item on the menu");
+        } else {
+            menu.removeBakedGoods(remove);
+        }
     }
 
     // MODIFIES: this
@@ -130,7 +116,140 @@ public class OwnerInterface {
                 remove = d;
             }
         }
-        menu.removeDrinks(remove);
+        if (remove == null) {
+            System.out.println("Cannot find drink item on the menu");
+        } else {
+            menu.removeDrinks(remove);
+        }
     }
 
+    // EFFECTS: handles user input to identify the category of item to modify price from the menu
+    public void modifyPrice() {
+        System.out.println("Please indicate whether the item is a 'bakedgoods' or a 'drink': ");
+        user = in.nextLine();
+        if (user.equals("bakedgoods")) {
+            modifyPriceBakedGoods();
+        } else if (user.equals("drink")) {
+            modifyPriceDrink();
+        }
+    }
+
+    // EFFECTS: this
+    // MODIFIES: modify the price of the baked goods item if it's on the menu
+    public void modifyPriceBakedGoods() {
+        BakedGoods modifyBakedGoodsPrice = null;
+        for (BakedGoods bakedGoods: menu.getBakedGoods()) {
+            if (bakedGoods.getName().equals(user)) {
+                modifyBakedGoodsPrice = bakedGoods;
+            }
+        }
+        if (modifyBakedGoodsPrice == null) {
+            System.out.println("Cannot find item on menu");
+        } else {
+            System.out.println("Please enter the new price for the item: ");
+            double newPrice = in.nextDouble();
+            modifyBakedGoodsPrice.setPrice(newPrice);
+        }
+    }
+
+    // EFFECTS: this
+    // MODIFIES: modify the price of the drink item if it's on the menu
+    public void modifyPriceDrink() {
+        Drinks modifyDrinkPrice = null;
+        for (Drinks d : menu.getDrinks()) {
+            if (d.getName().equals(user)) {
+                modifyDrinkPrice = d;
+            }
+        }
+        if (modifyDrinkPrice == null) {
+            System.out.println("Cannot find item on the menu.");
+        } else {
+            System.out.println("Please enter the new price for the item: ");
+            double newPrice = in.nextDouble();
+            modifyDrinkPrice.setPrice(newPrice);
+        }
+    }
+
+    // EFFECTS: handles user input to identify the category of item to modify quantity from the menu
+    public void modifyQuantity() {
+        System.out.println("Please indicate whether the item is a 'bakedgoods' or a 'drink': ");
+        user = in.nextLine();
+        if (user.equals("bakedgoods")) {
+            modifyQuantityBakedGoods();
+        } else if (user.equals("drink")) {
+            modifyQuantityDrink();
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: modify the quantity of the baked goods item if it's on the menu
+    public void modifyQuantityBakedGoods() {
+        BakedGoods modifyQuantityBakedGoods = null;
+        for (BakedGoods bakedGoods: menu.getBakedGoods()) {
+            if (bakedGoods.getName().equals(user)) {
+                modifyQuantityBakedGoods = bakedGoods;
+            }
+        }
+        if (modifyQuantityBakedGoods == null) {
+            System.out.println("Cannot find item on the menu.");
+        } else {
+            System.out.println("Please enter the new quantity for the item: ");
+            int newQuantity = in.nextInt();
+            modifyQuantityBakedGoods.setQuantity(newQuantity);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: modify the quantity of the baked goods item if it's on the menu
+    public void modifyQuantityDrink() {
+        Drinks modifyQuantityDrink = null;
+        for (Drinks d : menu.getDrinks()) {
+            if (d.getName().equals(user)) {
+                modifyQuantityDrink = d;
+            }
+        }
+        if (modifyQuantityDrink == null) {
+            System.out.println("Cannot find item on the menu.");
+        } else {
+            System.out.println("Please enter the new quantity for the item: ");
+            int setQuantity = in.nextInt();
+            modifyQuantityDrink.setQuantity(setQuantity);
+        }
+    }
+
+    // EFFECTS: prints the instructions to instruct the user what to input
+    public void printInstructions() {
+        System.out.println("Enter 1 to add an item to the menu\n"
+                +    "Enter 2 to view the menu\n"
+                +    "Enter 3 to remove an item from the menu\n"
+                +    "Enter 4 to modify the price of an item on the menu\n"
+                +    "Enter 5 to modify the quantity of an item on the menu\n"
+                +    "Enter 6 to quit the program");
+    }
+
+    // EFFECTS: redirect the user to other interfaces based on the user input
+    public void handleInput() {
+        user = in.nextLine();
+        switch (user) {
+            case "1":
+                addItem();
+                break;
+            case "2":
+                getItem();
+                break;
+            case "3":
+                removeItem();
+                break;
+            case "4":
+                modifyPrice();
+                break;
+            case "5":
+                modifyQuantity();
+                break;
+            case "6":
+                System.out.println("Have a good day!");
+                runProgram = false;
+                break;
+        }
+    }
 }
