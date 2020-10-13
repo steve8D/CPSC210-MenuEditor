@@ -30,8 +30,8 @@ public class ShoppingCartTest {
         checkOut.addItem(brownSugarMilkTea);
         checkOut.addItem(brownSugarMilkTea);
         assertEquals(3, checkOut.getNumberOfItems());
-        assertEquals(49, croissant.getQuantity());
-        assertEquals(18, brownSugarMilkTea.getQuantity());
+        assertTrue(checkOut.getItems().contains(brownSugarMilkTea));
+        assertTrue(checkOut.getItems().contains(croissant));
     }
 
     @Test
@@ -42,6 +42,8 @@ public class ShoppingCartTest {
         checkOut.addItem(croissant);
         checkOut.addItem(brownSugarMilkTea);
         assertEquals(0, checkOut.getNumberOfItems());
+        assertFalse(checkOut.getItems().contains(brownSugarMilkTea));
+        assertFalse(checkOut.getItems().contains(croissant));
     }
 
     @Test
@@ -54,7 +56,6 @@ public class ShoppingCartTest {
         // remove the milk tea because customer added one extra by mistake
         checkOut.removeItem(brownSugarMilkTea);
         assertEquals(2, checkOut.getNumberOfItems());
-        assertEquals(19, brownSugarMilkTea.getQuantity());
     }
 
     @Test
@@ -65,5 +66,7 @@ public class ShoppingCartTest {
         checkOut.addItem(brownSugarMilkTea);
 
         assertEquals(10, checkOut.totalPrice());
+        assertEquals(49, croissant.getQuantity());
+        assertEquals(18, brownSugarMilkTea.getQuantity());
     }
 }

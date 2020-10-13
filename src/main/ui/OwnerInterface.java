@@ -18,7 +18,7 @@ public class OwnerInterface {
         runProgram = true;
     }
 
-    // EFFECTS: print instructions and handle user input
+    // EFFECTS: loads the owner interface
     public void loadOwnerInterface() {
         while (runProgram) {
             printInstructions();
@@ -63,14 +63,15 @@ public class OwnerInterface {
         menu.addDrinks(new Drinks(name, price, quantity));
     }
 
-    // MODIFIES: this
     // EFFECTS: print the baked goods item and drink item offered on the menu
     public void getItem() {
         System.out.println("The menu currently offers the following baked good items: ");
+        System.out.println("----------------------------------------------------------");
         for (BakedGoods bakedGoods: menu.getBakedGoods()) {
             System.out.println(bakedGoods.getName());
         }
-        System.out.println("and the following drink items: ");
+        System.out.println("And the following drink items: ");
+        System.out.println("----------------------------------------------------------");
         for (Drinks drinks: menu.getDrinks()) {
             System.out.println(drinks.getName());
         }
@@ -227,7 +228,7 @@ public class OwnerInterface {
                 +    "Enter 6 to quit the program");
     }
 
-    // EFFECTS: redirect the user to other interfaces based on the user input
+    // EFFECTS: redirect the user to other functions on the interface based on the user input
     public void handleInput() {
         user = in.nextLine();
         switch (user) {
