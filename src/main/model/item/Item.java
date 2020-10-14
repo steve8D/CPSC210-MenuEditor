@@ -53,7 +53,7 @@ public abstract class Item {
         }
     }
 
-    // EFFECTS: returns true if the item's quantity is equal to zero, other wise returns false.
+    // EFFECTS: returns true if the item's quantity is equal to zero, otherwise returns false.
     public boolean isOutOfStock() {
         return quantity == 0;
     }

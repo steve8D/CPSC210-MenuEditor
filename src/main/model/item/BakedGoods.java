@@ -7,8 +7,8 @@ package model.item;
 public class BakedGoods extends Item {
 
     // constructs a baked goods item on the menu
-    // REQUIRES: price > 0 quantity >= 0
-    // EFFECTS: constructs an item on the menu
+    // REQUIRES: price > 0, quantity >= 0
+    // EFFECTS: constructs an item of category baked goods
     public BakedGoods(String name, double price, int quantity) {
         super(name, price, quantity);
     }

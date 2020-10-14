@@ -15,7 +15,7 @@ public class MyMenu {
     private ArrayList<Drinks> drinks;
     private ArrayList<BakedGoods> bakedGoods;
 
-    // EFFECTS: construct a list of items on the menu
+    // EFFECTS: construct empty lists of drinks items and baked goods items
     public MyMenu() {
         drinks = new ArrayList<>();
         bakedGoods = new ArrayList<>();
@@ -31,18 +31,18 @@ public class MyMenu {
         return bakedGoods;
     }
 
-    // REQUIRES: drink item is not on the menu
     // MODIFIES: this
-    // EFFECTS: add a drink item on the menu
+    // EFFECTS: add an item of category 'drinks' on the menu if the item is not on the menu.
+    //         otherwise silently returns
     public void addDrinks(Drinks i) {
         if (!drinks.contains(i)) {
             drinks.add(i);
         }
     }
 
-    // REQUIRES: baked goods item is not on the menu
     // MODIFIES: this
-    // EFFECTS: add a baked goods item on the menu
+    // EFFECTS: add an item on the 'baked goods' category of the menu if the item is not on the menu,
+    //        otherwise silently returns
     public void addBakedGoods(BakedGoods i) {
         if (!bakedGoods.contains(i)) {
             bakedGoods.add(i);

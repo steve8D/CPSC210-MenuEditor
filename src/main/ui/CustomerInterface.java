@@ -19,15 +19,19 @@ public class CustomerInterface {
     private String user;
     private boolean runProgram;
 
+    // EFFECTS: runs the customer interface
     public CustomerInterface() {
+        loadCustomerInterface();
+    }
+
+    // MODIFIES: this
+    // EFFECTS: processes user input
+    public void loadCustomerInterface() {
         shoppingCart = new ShoppingCart();
         menu = new MyMenu();
         in = new Scanner(System.in);
         runProgram = true;
-    }
 
-    // EFFECTS: loads the customer interface
-    public void loadCustomerInterface() {
         while (runProgram) {
             loadInstructions();
             handleInput();
@@ -36,6 +40,7 @@ public class CustomerInterface {
 
     // MODIFIES: this
     // EFFECTS: adds an item to the shopping cart if the item is on the menu
+    //          otherwise prints the item is not found
     public void addItem() {
         Item add = null;
         System.out.println("Please enter the name of the item: ");
@@ -59,7 +64,7 @@ public class CustomerInterface {
         }
     }
 
-    // EFFECTS: print the baked goods item and drink item offered on the menu
+    // EFFECTS: print the baked goods item and drink item on the menu
     public void getItem() {
         System.out.println("The menu currently offers the following baked good items: ");
         for (BakedGoods bakedGoods: menu.getBakedGoods()) {
@@ -73,6 +78,7 @@ public class CustomerInterface {
 
     // MODIFIES: this
     // EFFECTS: delete an item from the shopping cart if the user added the item in the shopping cart
+    //          otherwise prints the item is not found
     public void deleteItem() {
         Item delete = null;
         System.out.println("Please enter the name of the item: ");
@@ -96,7 +102,7 @@ public class CustomerInterface {
         System.out.println("Thank you for stopping by our store.");
     }
 
-    // EFFECTS: loads instructions to guide users available inputs
+    // EFFECTS: loads instructions to inform users of available inputs
     public void loadInstructions() {
         System.out.println("Enter 1 to view the menu\n"
                 +    "Enter 2 to add an item to the shopping cart\n"
@@ -105,6 +111,7 @@ public class CustomerInterface {
                 +    "Enter 5 to quit the program");
     }
 
+    // MODIFIES: this
     // EFFECTS: redirect the user to other functions on the interface based on the user input
     public void handleInput() {
         user = in.nextLine();

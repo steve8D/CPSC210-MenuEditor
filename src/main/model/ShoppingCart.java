@@ -26,9 +26,9 @@ public class ShoppingCart {
         return shoppingCart;
     }
 
-    // REQUIRES: Item i is in stock
     // MODIFIES: this
-    // EFFECTS: adds Item i to the shopping cart
+    // EFFECTS: adds item to the shopping cart if item is still in stock
+    //         otherwise returns silently
     public void addItem(Item i) {
         if (!i.isOutOfStock()) {
             shoppingCart.add(i);
