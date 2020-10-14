@@ -6,6 +6,10 @@ import model.item.Drinks;
 
 import java.util.Scanner;
 
+/*
+    Represents the owner/manager interface of the restaurant application
+ */
+
 public class OwnerInterface {
     private MyMenu menu;
     private Scanner in;

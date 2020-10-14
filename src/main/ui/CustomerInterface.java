@@ -8,6 +8,10 @@ import model.item.Item;
 
 import java.util.Scanner;
 
+/*
+    Represents the customer interface of the restaurant application
+ */
+
 public class CustomerInterface {
     private ShoppingCart shoppingCart;
     private MyMenu menu;

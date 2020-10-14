@@ -2,6 +2,8 @@ package ui;
 
 import java.util.Scanner;
 
+// Represents the log in interface of the restaurant application
+
 public class Application {
     private Scanner in;
     private String user;

@@ -1,5 +1,9 @@
 package model.item;
 
+/*
+    Represents an item belonging to the baked goods category on the menu.
+ */
+
 public class BakedGoods extends Item {
 
     // constructs a baked goods item on the menu

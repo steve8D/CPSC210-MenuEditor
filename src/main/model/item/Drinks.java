@@ -1,5 +1,9 @@
 package model.item;
 
+/*
+    Represents an item belonging to the drink category on the menu.
+ */
+
 public class Drinks extends Item {
 
     // constructs a drink item on the menu

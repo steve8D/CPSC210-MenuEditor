@@ -5,6 +5,10 @@ import model.item.Drinks;
 
 import java.util.ArrayList;
 
+/*
+    Represents a menu containing a list of baked goods and drinks items
+ */
+
 public class MyMenu {
 
 

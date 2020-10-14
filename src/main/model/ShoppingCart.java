@@ -4,6 +4,10 @@ import model.item.Item;
 
 import java.util.ArrayList;
 
+/*
+    Represents a shopping cart containing a list of baked goods and drink items the customer added from the menu
+ */
+
 public class ShoppingCart {
     ArrayList<Item> shoppingCart;
 

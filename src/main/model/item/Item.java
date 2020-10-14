@@ -1,5 +1,9 @@
 package model.item;
 
+/*
+    Represents an abstract food item on the menu that has a name, price, and quantity
+ */
+
 public abstract class Item {
     private double price;
     private String name;
