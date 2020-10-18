@@ -32,6 +32,7 @@ public class ShoppingCart {
     public void addItem(Item i) {
         if (!i.isOutOfStock()) {
             shoppingCart.add(i);
+            i.setQuantity(i.getQuantity() - 1);
         }
     }
 
@@ -39,6 +40,7 @@ public class ShoppingCart {
     // EFFECTS: remove Item i from the shopping cart
     public void removeItem(Item i) {
         shoppingCart.remove(i);
+        i.setQuantity(i.getQuantity() + 1);
     }
 
     // MODIFIES: Item
@@ -48,7 +50,7 @@ public class ShoppingCart {
         int totalPrice = 0;
         for (Item i: shoppingCart) {
             totalPrice += i.getPrice();
-            i.setQuantity(i.getQuantity() - 1);
+            // save the quantity into the file
         }
         return totalPrice;
     }
