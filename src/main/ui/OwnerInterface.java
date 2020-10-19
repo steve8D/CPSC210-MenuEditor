@@ -165,6 +165,7 @@ public class OwnerInterface {
             System.out.println("Please enter the new price for the item: ");
             double newPrice = in.nextDouble();
             modifyBakedGoodsPrice.setPrice(newPrice);
+            in.nextLine();
         }
     }
 
@@ -186,6 +187,7 @@ public class OwnerInterface {
             System.out.println("Please enter the new price for the item: ");
             double newPrice = in.nextDouble();
             modifyDrinkPrice.setPrice(newPrice);
+            in.nextLine();
         }
     }
 
@@ -219,6 +221,7 @@ public class OwnerInterface {
             System.out.println("Please enter the new quantity for the item: ");
             int newQuantity = in.nextInt();
             modifyQuantityBakedGoods.setQuantity(newQuantity);
+            in.nextLine();
         }
     }
 
@@ -240,6 +243,7 @@ public class OwnerInterface {
             System.out.println("Please enter the new quantity for the item: ");
             int setQuantity = in.nextInt();
             modifyQuantityDrink.setQuantity(setQuantity);
+            in.nextLine();
         }
     }
 
