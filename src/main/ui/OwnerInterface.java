@@ -151,6 +151,8 @@ public class OwnerInterface {
     // MODIFIES: modify the price of the baked goods item if it's on the menu
     //          otherwise prints the item is not found
     public void modifyPriceBakedGoods() {
+        System.out.println("Enter name of the baked goods item: ");
+        user = in.nextLine();
         BakedGoods modifyBakedGoodsPrice = null;
         for (BakedGoods bakedGoods: menu.getBakedGoods()) {
             if (bakedGoods.getName().equals(user)) {
@@ -170,6 +172,8 @@ public class OwnerInterface {
     // MODIFIES: modify the price of the drink item if it's on the menu
     //          otherwise prints the item is not found
     public void modifyPriceDrink() {
+        System.out.println("Enter name of the drink item: ");
+        user = in.nextLine();
         Drinks modifyDrinkPrice = null;
         for (Drinks d : menu.getDrinks()) {
             if (d.getName().equals(user)) {
@@ -201,6 +205,8 @@ public class OwnerInterface {
     // EFFECTS: modify the quantity of the baked goods item if it's on the menu
     //        otherwise prints the item is not found
     public void modifyQuantityBakedGoods() {
+        System.out.println("Enter name of the baked goods item: ");
+        user = in.nextLine();
         BakedGoods modifyQuantityBakedGoods = null;
         for (BakedGoods bakedGoods: menu.getBakedGoods()) {
             if (bakedGoods.getName().equals(user)) {
@@ -220,6 +226,8 @@ public class OwnerInterface {
     // EFFECTS: modify the quantity of the item of category 'drink' if it's on the menu,
     //        otherwise prints the item is not found
     public void modifyQuantityDrink() {
+        System.out.println("Enter name of the drink item: ");
+        user = in.nextLine();
         Drinks modifyQuantityDrink = null;
         for (Drinks d : menu.getDrinks()) {
             if (d.getName().equals(user)) {
