@@ -46,8 +46,8 @@ public class ShoppingCart {
     // MODIFIES: Item
     // EFFECTS: returns the total price of the items in the shopping cart
     //      and deduct one quantity for each item in the cart
-    public int totalPrice() {
-        int totalPrice = 0;
+    public double totalPrice() {
+        double totalPrice = 0;
         for (Item i: shoppingCart) {
             totalPrice += i.getPrice();
             // save the quantity into the file
