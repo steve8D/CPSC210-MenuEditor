@@ -5,7 +5,9 @@ import model.ShoppingCart;
 import model.item.BakedGoods;
 import model.item.Drinks;
 import model.item.Item;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 /*
@@ -13,6 +15,7 @@ import java.util.Scanner;
  */
 
 public class CustomerInterface {
+    private static final String DIRECTORY = "./data/MyMenu.json";
     private ShoppingCart shoppingCart;
     private MyMenu menu;
     private Scanner in;
@@ -127,12 +130,26 @@ public class CustomerInterface {
                 break;
             case "4":
                 checkOut();
+                saveMenu();
                 runProgram = false;
                 break;
             case "5":
                 System.out.println("Have a good day!");
                 runProgram = false;
                 break;
+        }
+    }
+
+    // The method saveMenu() is based on the following Github code
+    // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
+    // MODIFIES: this
+    // EFFECTS: save the menu to file
+    public void saveMenu() {
+        try {
+            JsonWriter writer = new JsonWriter(DIRECTORY);
+            writer.write(menu);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to save to: ");
         }
     }
 }
