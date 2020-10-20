@@ -166,6 +166,7 @@ public class OwnerInterface {
             double newPrice = in.nextDouble();
             modifyBakedGoodsPrice.setPrice(newPrice);
             in.nextLine();
+            System.out.println("Price of " + modifyBakedGoodsPrice + "is now " + newPrice);
         }
     }
 
@@ -188,6 +189,7 @@ public class OwnerInterface {
             double newPrice = in.nextDouble();
             modifyDrinkPrice.setPrice(newPrice);
             in.nextLine();
+            System.out.println("Price of " + modifyDrinkPrice + "is now " + newPrice);
         }
     }
 
@@ -222,6 +224,7 @@ public class OwnerInterface {
             int newQuantity = in.nextInt();
             modifyQuantityBakedGoods.setQuantity(newQuantity);
             in.nextLine();
+            System.out.println("Price of " + modifyQuantityBakedGoods + "is now " + newQuantity);
         }
     }
 
@@ -241,9 +244,10 @@ public class OwnerInterface {
             System.out.println("Cannot find item on the menu.");
         } else {
             System.out.println("Please enter the new quantity for the item: ");
-            int setQuantity = in.nextInt();
-            modifyQuantityDrink.setQuantity(setQuantity);
+            int newQuantity = in.nextInt();
+            modifyQuantityDrink.setQuantity(newQuantity);
             in.nextLine();
+            System.out.println("Price of " + modifyQuantityDrink + "is now " + newQuantity);
         }
     }
 
