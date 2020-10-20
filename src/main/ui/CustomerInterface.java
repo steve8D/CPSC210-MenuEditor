@@ -127,6 +127,7 @@ public class CustomerInterface {
                 break;
             case "4":
                 checkOut();
+                runProgram = false;
                 break;
             case "5":
                 System.out.println("Have a good day!");

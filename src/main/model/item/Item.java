@@ -57,5 +57,4 @@ public abstract class Item {
     public boolean isOutOfStock() {
         return quantity == 0;
     }
-
 }

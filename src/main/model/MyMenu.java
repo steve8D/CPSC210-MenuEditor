@@ -3,6 +3,8 @@ package model;
 import model.item.BakedGoods;
 import model.item.Drinks;
 import model.item.Item;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -19,14 +21,8 @@ public class MyMenu {
 
     // EFFECTS: construct empty lists of drinks items and baked goods items
     public MyMenu() {
-//        drinks = new ArrayList<>();
-//        bakedGoods = new ArrayList<>();
         items = new ArrayList<>();
     }
-
-//    public ArrayList<Drinks> getDrinks() {
-//        return drinks;
-//    }
 
     // EFFECTS: return the items in the drink section on the menu
     public ArrayList<Drinks> getDrinks() {
@@ -39,9 +35,6 @@ public class MyMenu {
         return ans;
     }
 
-//    public ArrayList<BakedGoods> getBakedGoods() {
-//        return bakedGoods;
-//    }
     // EFFECTS: return the items in the baked goods section on the menu
     public ArrayList<BakedGoods> getBakedGoods() {
         ArrayList<BakedGoods> ans = new ArrayList<>();
@@ -53,11 +46,6 @@ public class MyMenu {
         return ans;
     }
 
-//    public void addDrinks(Drinks i) {
-//        if (!drinks.contains(i)) {
-//            drinks.add(i);
-//        }
-//    }
     // MODIFIES: this
     // EFFECTS: add an item of category 'drinks' on the menu if the item is not on the menu.
     //         otherwise silently returns
@@ -66,12 +54,6 @@ public class MyMenu {
             items.add(i);
         }
     }
-
-//    public void addBakedGoods(BakedGoods i) {
-//        if (!bakedGoods.contains(i)) {
-//            bakedGoods.add(i);
-//        }
-//    }
 
     // MODIFIES: this
     // EFFECTS: add an item on the 'baked goods' category of the menu if the item is not on the menu,
@@ -94,10 +76,6 @@ public class MyMenu {
         items.remove(i);
     }
 
-//    public int getNumberOfDrinks() {
-//        return drinks.size();
-//    }
-
     // EFFECTS: returns number of drink items
     public int getNumberOfDrinks() {
         int ans = 0;
@@ -109,10 +87,6 @@ public class MyMenu {
         return ans;
     }
 
-//    public int getNumberOfBakedGoods() {
-//        return bakedGoods.size();
-//    }
-
     // EFFECTS: returns number of baked good items
     public int getNumberOfBakedGoods() {
         int ans = 0;
@@ -122,5 +96,22 @@ public class MyMenu {
             }
         }
         return ans;
+    }
+
+    // MODIFIES: this
+    // EFFECTS: returns lists of items on menu as JSON format
+    public JSONObject toJson() {
+        JSONArray jsonMenu = new JSONArray();
+        for (Item i: items) {
+            if (i instanceof BakedGoods) {
+                jsonMenu.put(((BakedGoods) i).toJson());
+            }
+            if (i instanceof Drinks) {
+                jsonMenu.put(((Drinks) i).toJson());
+            }
+        }
+        JSONObject json = new JSONObject();
+        json.put("items", jsonMenu);
+        return json;
     }
 }
