@@ -31,40 +31,34 @@ public class MyMenuTest {
 
     @Test
     public void testAddDrinks() {
-        menu.addDrinks(brownSugarMilkTea);
-        menu.addDrinks(blackCoffee);
+        menu.addItem(brownSugarMilkTea);
+        menu.addItem(blackCoffee);
+        menu.addItem(croissant);
+        menu.addItem(swissRollCake);
         assertEquals(2, menu.getNumberOfDrinks());
-    }
-
-    @Test
-    public void testAddDrinksDuplicate() {
-        menu.addDrinks(brownSugarMilkTea);
-        menu.addDrinks(blackCoffee);
-        menu.addDrinks(brownSugarMilkTea);
-        menu.addDrinks(blackCoffee);
-        assertEquals(2, menu.getNumberOfDrinks());
-    }
-
-    @Test
-    public void testAddBakedGoods() {
-        menu.addBakedGoods(croissant);
-        menu.addBakedGoods(swissRollCake);
         assertEquals(2, menu.getNumberOfBakedGoods());
     }
 
     @Test
-    public void testAddBakedGoodsDuplicate() {
-        menu.addBakedGoods(croissant);
-        menu.addBakedGoods(swissRollCake);
-        menu.addBakedGoods(croissant);
-        menu.addBakedGoods(swissRollCake);
+    public void testaddDrinksDuplicate() {
+        menu.addItem(brownSugarMilkTea);
+        menu.addItem(blackCoffee);
+        menu.addItem(croissant);
+        menu.addItem(swissRollCake);
+
+        // add again
+        menu.addItem(brownSugarMilkTea);
+        menu.addItem(blackCoffee);
+        menu.addItem(croissant);
+        menu.addItem(swissRollCake);
+        assertEquals(2, menu.getNumberOfDrinks());
         assertEquals(2, menu.getNumberOfBakedGoods());
     }
 
     @Test
     public void testRemoveDrinks() {
         // add a drink item and confirms it is there
-        menu.addDrinks(brownSugarMilkTea);
+        menu.addItem(brownSugarMilkTea);
         assertTrue(menu.getDrinks().contains(brownSugarMilkTea));
         assertEquals(1, menu.getNumberOfDrinks());
 
@@ -83,7 +77,7 @@ public class MyMenuTest {
 
     @Test
     public void testRemoveBakedGoods() {
-        menu.addBakedGoods(swissRollCake);
+        menu.addItem(swissRollCake);
         assertTrue(menu.getBakedGoods().contains(swissRollCake));
         assertEquals(1, menu.getNumberOfBakedGoods());
 
