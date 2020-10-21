@@ -37,41 +37,22 @@ public class OwnerInterface {
     }
 
     // MODIFIES: this
-    // EFFECTS: handles user input to categorize section of item to add to menu
+    // EFFECTS: add an item to the menu
     public void addItem() {
+        System.out.println("Please enter the name of the item: ");
+        String name = in.nextLine();
+        System.out.println("Please enter the price of the item: ");
+        double price = in.nextDouble();
+        System.out.println("Please enter the quantity of the item: ");
+        int quantity = in.nextInt();
+        in.nextLine();
         System.out.println("Please indicate whether the item is a 'bakedgoods' or a 'drink': ");
         user = in.nextLine();
         if (user.equals("bakedgoods")) {
-            addBakedGoods();
+            menu.addItem(new BakedGoods(name, price, quantity));
         } else if (user.equals("drink")) {
-            addDrink();
+            menu.addItem(new Drinks(name, price, quantity));
         }
-    }
-
-    // MODIFIES: this
-    // EFFECTS: add a drink item to the menu
-    public void addBakedGoods() {
-        System.out.println("Please enter the name of the item: ");
-        String name = in.nextLine();
-        System.out.println("Please enter the price of the item: ");
-        double price = in.nextDouble();
-        System.out.println("Please enter the quantity of the item: ");
-        int quantity = in.nextInt();
-        in.nextLine();
-        menu.addBakedGoods(new BakedGoods(name, price, quantity));
-    }
-
-    // MODIFIES: this
-    // EFFECTS: add a baked goods item to the menu
-    public void addDrink() {
-        System.out.println("Please enter the name of the item: ");
-        String name = in.nextLine();
-        System.out.println("Please enter the price of the item: ");
-        double price = in.nextDouble();
-        System.out.println("Please enter the quantity of the item: ");
-        int quantity = in.nextInt();
-        in.nextLine();
-        menu.addDrinks(new Drinks(name, price, quantity));
     }
 
     // EFFECTS: print the baked goods item and drink item offered on the menu
@@ -304,4 +285,15 @@ public class OwnerInterface {
             System.out.println("Unable to save to: ");
         }
     }
+
+//    public void loadMenu() {
+//        try {
+//            JsonReader reader = new JsonReader(DIRECTORY);
+//            reader.read(menu);
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
 }

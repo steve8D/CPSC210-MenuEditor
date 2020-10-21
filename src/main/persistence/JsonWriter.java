@@ -23,7 +23,7 @@ public class JsonWriter {
         writer = new PrintWriter(destination);
 
         //write
-        writer.print(myMenu.toJson().toString());
+        writer.print(myMenu.toJson().toString(4));
 
         //close
         writer.close();

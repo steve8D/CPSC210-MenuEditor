@@ -17,7 +17,7 @@ public class MyMenu {
     // Combine into one list
 //    private ArrayList<Drinks> drinks;
 //    private ArrayList<BakedGoods> bakedGoods;
-    private ArrayList<Item> items;
+    private final ArrayList<Item> items;
 
     // EFFECTS: construct empty lists of drinks items and baked goods items
     public MyMenu() {
@@ -27,9 +27,9 @@ public class MyMenu {
     // EFFECTS: return the items in the drink section on the menu
     public ArrayList<Drinks> getDrinks() {
         ArrayList<Drinks> ans = new ArrayList<>();
-        for (int i = 0; i < items.size(); i++) {
-            if (items.get(i) instanceof Drinks) {
-                ans.add((Drinks)items.get(i));
+        for (Item i: items) {
+            if (i instanceof Drinks) {
+                ans.add((Drinks)i);
             }
         }
         return ans;
@@ -38,27 +38,18 @@ public class MyMenu {
     // EFFECTS: return the items in the baked goods section on the menu
     public ArrayList<BakedGoods> getBakedGoods() {
         ArrayList<BakedGoods> ans = new ArrayList<>();
-        for (int i = 0; i < items.size(); i++) {
-            if (items.get(i) instanceof BakedGoods) {
-                ans.add((BakedGoods)items.get(i));
+        for (Item i: items) {
+            if (i instanceof BakedGoods) {
+                ans.add((BakedGoods) i);
             }
         }
         return ans;
     }
 
     // MODIFIES: this
-    // EFFECTS: add an item of category 'drinks' on the menu if the item is not on the menu.
-    //         otherwise silently returns
-    public void addDrinks(Drinks i) {
-        if (!items.contains(i)) {
-            items.add(i);
-        }
-    }
-
-    // MODIFIES: this
-    // EFFECTS: add an item on the 'baked goods' category of the menu if the item is not on the menu,
+    // EFFECTS: add an item on the menu if the item is not on the menu,
     //        otherwise silently returns
-    public void addBakedGoods(BakedGoods i) {
+    public void addItem(Item i) {
         if (!items.contains(i)) {
             items.add(i);
         }
@@ -79,8 +70,8 @@ public class MyMenu {
     // EFFECTS: returns number of drink items
     public int getNumberOfDrinks() {
         int ans = 0;
-        for (int i = 0; i < items.size(); i++) {
-            if (items.get(i) instanceof Drinks) {
+        for (Item i: items) {
+            if (i instanceof Drinks) {
                 ans++;
             }
         }
@@ -90,8 +81,8 @@ public class MyMenu {
     // EFFECTS: returns number of baked good items
     public int getNumberOfBakedGoods() {
         int ans = 0;
-        for (int i = 0; i < items.size(); i++) {
-            if (items.get(i) instanceof BakedGoods) {
+        for (Item i: items) {
+            if (i instanceof BakedGoods) {
                 ans++;
             }
         }
