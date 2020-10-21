@@ -14,5 +14,5 @@ where user can can log in as a customer to add the items into the shopping list 
 - As a manager/shop owner, I want to be able modify an item's price and quantity on my menu.
 - As a customer, I want to be able to select the items in different categories and add it to my order list/shopping cart.
 ###### Data Persistence User Stories
-- As a user, I want to be able to save the items on the menu and their name, price, and quantity
-- As a user, I want to be able to load the items on the menu and their name, price, and quantity from file 
+- As a user, I want my items on the menu to be saved automatically upon exiting the program.
+- As a user, I want my items on the menu to be load automatically upon opening the program.
