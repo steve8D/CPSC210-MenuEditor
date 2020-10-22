@@ -24,6 +24,10 @@ public class MyMenu {
         items = new ArrayList<>();
     }
 
+    public ArrayList<Item> getItems() {
+        return items;
+    }
+
     // EFFECTS: return the items in the drink section on the menu
     public ArrayList<Drinks> getDrinks() {
         ArrayList<Drinks> ans = new ArrayList<>();
@@ -53,6 +57,12 @@ public class MyMenu {
         if (!items.contains(i)) {
             items.add(i);
         }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: remove the item from the menu
+    public void removeItem(Item i) {
+        items.remove(i);
     }
 
     // MODIFIES: this

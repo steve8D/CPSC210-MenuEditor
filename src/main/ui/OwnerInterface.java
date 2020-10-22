@@ -3,6 +3,7 @@ package ui;
 import model.MyMenu;
 import model.item.BakedGoods;
 import model.item.Drinks;
+import model.item.Item;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
@@ -72,168 +73,67 @@ public class OwnerInterface {
     }
 
     // MODIFIES: this
-    // EFFECTS: handles user input to identify the category of item to remove from the menu
+    // EFFECTS: remove item from the menu if the item exists
+    //      otherwise, print item not found.
     public void removeItem() {
-        System.out.println("Please indicate whether the item is a 'bakedgoods' or a 'drink': ");
-        user = in.nextLine();
-        if (user.equals("bakedgoods")) {
-            removeBakedGoods();
-        } else if (user.equals("drink")) {
-            removeDrink();
-        }
-    }
-
-    // MODIFIES: this
-    // EFFECTS: remove a baked goods item from the menu if it's on the menu
-    //          otherwise prints the item is not found
-    public void removeBakedGoods() {
-        BakedGoods remove = null;
+        Item remove = null;
         System.out.println("Please enter the name of the item: ");
         user = in.nextLine();
-        for (BakedGoods bakedGoods: menu.getBakedGoods()) {
-            if (bakedGoods.getName().equals(user)) {
-                remove = bakedGoods;
+        for (Item i: menu.getItems()) {
+            if (i.getName().equals(user)) {
+                remove = i;
             }
         }
         if (remove == null) {
-            System.out.println("Cannot find baked goods item on the menu");
+            System.out.println("Cannot find item on the menu");
         } else {
-            menu.removeBakedGoods(remove);
+            menu.removeItem(remove);
         }
     }
 
     // MODIFIES: this
-    // EFFECTS: remove a drink item from the menu if it's on the menu
-    //          otherwise prints the item is not found
-    public void removeDrink() {
-        Drinks remove = null;
-        System.out.println("Please enter the name of the item: ");
-        user = in.nextLine();
-        for (Drinks d: menu.getDrinks()) {
-            if (d.getName().equals(user)) {
-                remove = d;
-            }
-        }
-        if (remove == null) {
-            System.out.println("Cannot find drink item on the menu");
-        } else {
-            menu.removeDrinks(remove);
-        }
-    }
-
-    // MODIFIES: this
-    // EFFECTS: handles user input to identify the category of item to modify price from the menu
+    // EFFECTS: modify price of an item on the menu if it exists
+    //      otherwise, print item not found.
     public void modifyPrice() {
-        System.out.println("Please indicate whether the item is a 'bakedgoods' or a 'drink': ");
+        System.out.println("Enter name of the item: ");
         user = in.nextLine();
-        if (user.equals("bakedgoods")) {
-            modifyPriceBakedGoods();
-        } else if (user.equals("drink")) {
-            modifyPriceDrink();
-        }
-    }
-
-    // EFFECTS: this
-    // MODIFIES: modify the price of the baked goods item if it's on the menu
-    //          otherwise prints the item is not found
-    public void modifyPriceBakedGoods() {
-        System.out.println("Enter name of the baked goods item: ");
-        user = in.nextLine();
-        BakedGoods modifyBakedGoodsPrice = null;
-        for (BakedGoods bakedGoods: menu.getBakedGoods()) {
-            if (bakedGoods.getName().equals(user)) {
-                modifyBakedGoodsPrice = bakedGoods;
+        Item modify = null;
+        for (Item i: menu.getItems()) {
+            if (i.getName().equals(user)) {
+                modify = i;
             }
         }
-        if (modifyBakedGoodsPrice == null) {
+        if (modify == null) {
             System.out.println("Cannot find item on menu");
         } else {
             System.out.println("Please enter the new price for the item: ");
             double newPrice = in.nextDouble();
-            modifyBakedGoodsPrice.setPrice(newPrice);
+            modify.setPrice(newPrice);
             in.nextLine();
-            System.out.println("Price of " + modifyBakedGoodsPrice + "is now " + newPrice);
-        }
-    }
-
-    // EFFECTS: this
-    // MODIFIES: modify the price of the drink item if it's on the menu
-    //          otherwise prints the item is not found
-    public void modifyPriceDrink() {
-        System.out.println("Enter name of the drink item: ");
-        user = in.nextLine();
-        Drinks modifyDrinkPrice = null;
-        for (Drinks d : menu.getDrinks()) {
-            if (d.getName().equals(user)) {
-                modifyDrinkPrice = d;
-            }
-        }
-        if (modifyDrinkPrice == null) {
-            System.out.println("Cannot find item on the menu.");
-        } else {
-            System.out.println("Please enter the new price for the item: ");
-            double newPrice = in.nextDouble();
-            modifyDrinkPrice.setPrice(newPrice);
-            in.nextLine();
-            System.out.println("Price of " + modifyDrinkPrice + "is now " + newPrice);
+            System.out.println("Price of " + modify.getName() + " is now " + newPrice);
         }
     }
 
     // MODIFIES: this
-    // EFFECTS: handles user input to identify the category of item to modify quantity from the menu
+    // EFFECTS: modify quantity of an item on the menu if it exists
+    //      otherwise, print item not found.
     public void modifyQuantity() {
-        System.out.println("Please indicate whether the item is a 'bakedgoods' or a 'drink': ");
+        System.out.println("Enter name of the item: ");
         user = in.nextLine();
-        if (user.equals("bakedgoods")) {
-            modifyQuantityBakedGoods();
-        } else if (user.equals("drink")) {
-            modifyQuantityDrink();
-        }
-    }
-
-    // MODIFIES: this
-    // EFFECTS: modify the quantity of the baked goods item if it's on the menu
-    //        otherwise prints the item is not found
-    public void modifyQuantityBakedGoods() {
-        System.out.println("Enter name of the baked goods item: ");
-        user = in.nextLine();
-        BakedGoods modifyQuantityBakedGoods = null;
-        for (BakedGoods bakedGoods: menu.getBakedGoods()) {
-            if (bakedGoods.getName().equals(user)) {
-                modifyQuantityBakedGoods = bakedGoods;
+        Item modify = null;
+        for (Item i: menu.getItems()) {
+            if (i.getName().equals(user)) {
+                modify = i;
             }
         }
-        if (modifyQuantityBakedGoods == null) {
-            System.out.println("Cannot find item on the menu.");
+        if (modify == null) {
+            System.out.println("Cannot find item on menu");
         } else {
             System.out.println("Please enter the new quantity for the item: ");
             int newQuantity = in.nextInt();
-            modifyQuantityBakedGoods.setQuantity(newQuantity);
+            modify.setQuantity(newQuantity);
             in.nextLine();
-            System.out.println("Price of " + modifyQuantityBakedGoods + "is now " + newQuantity);
-        }
-    }
-
-    // MODIFIES: this
-    // EFFECTS: modify the quantity of the item of category 'drink' if it's on the menu,
-    //        otherwise prints the item is not found
-    public void modifyQuantityDrink() {
-        System.out.println("Enter name of the drink item: ");
-        user = in.nextLine();
-        Drinks modifyQuantityDrink = null;
-        for (Drinks d : menu.getDrinks()) {
-            if (d.getName().equals(user)) {
-                modifyQuantityDrink = d;
-            }
-        }
-        if (modifyQuantityDrink == null) {
-            System.out.println("Cannot find item on the menu.");
-        } else {
-            System.out.println("Please enter the new quantity for the item: ");
-            int newQuantity = in.nextInt();
-            modifyQuantityDrink.setQuantity(newQuantity);
-            in.nextLine();
-            System.out.println("Price of " + modifyQuantityDrink + "is now " + newQuantity);
+            System.out.println("Quantity of " + modify.getName() + " is now " + newQuantity);
         }
     }
 

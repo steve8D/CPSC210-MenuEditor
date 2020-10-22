@@ -50,7 +50,6 @@ public class ShoppingCart {
         double totalPrice = 0;
         for (Item i: shoppingCart) {
             totalPrice += i.getPrice();
-            // save the quantity into the file
         }
         return totalPrice;
     }

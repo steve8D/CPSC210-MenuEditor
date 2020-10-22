@@ -30,7 +30,7 @@ public class MyMenuTest {
     }
 
     @Test
-    public void testAddDrinks() {
+    public void testAddItems() {
         menu.addItem(brownSugarMilkTea);
         menu.addItem(blackCoffee);
         menu.addItem(croissant);
@@ -40,7 +40,7 @@ public class MyMenuTest {
     }
 
     @Test
-    public void testaddDrinksDuplicate() {
+    public void testAddItemsDuplicate() {
         menu.addItem(brownSugarMilkTea);
         menu.addItem(blackCoffee);
         menu.addItem(croissant);
@@ -56,41 +56,56 @@ public class MyMenuTest {
     }
 
     @Test
-    public void testRemoveDrinks() {
-        // add a drink item and confirms it is there
+    public void testRemoveOneItem() {
+        // add two item and confirms they are both there
         menu.addItem(brownSugarMilkTea);
         assertTrue(menu.getDrinks().contains(brownSugarMilkTea));
         assertEquals(1, menu.getNumberOfDrinks());
 
+        menu.addItem(swissRollCake);
+        assertTrue(menu.getBakedGoods().contains(swissRollCake));
+        assertEquals(1, menu.getNumberOfBakedGoods());
+
+        // remove only the baked good item and confirms it is not on the menu anymore
+        menu.removeItem(swissRollCake);
+        assertFalse(menu.getBakedGoods().contains(swissRollCake));
+        assertEquals(0, menu.getNumberOfBakedGoods());
+
         // remove the drink and confirms it is not on the menu anymore
-        menu.removeDrinks(brownSugarMilkTea);
+        assertTrue(menu.getDrinks().contains(brownSugarMilkTea));
+        assertEquals(1, menu.getNumberOfDrinks());
+    }
+
+    @Test
+    public void testRemoveTwoItems() {
+        // add two item and confirms they are both there
+        menu.addItem(brownSugarMilkTea);
+        assertTrue(menu.getDrinks().contains(brownSugarMilkTea));
+        assertEquals(1, menu.getNumberOfDrinks());
+
+        menu.addItem(swissRollCake);
+        assertTrue(menu.getBakedGoods().contains(swissRollCake));
+        assertEquals(1, menu.getNumberOfBakedGoods());
+
+        // remove only the baked good item and confirms it is not on the menu anymore
+        menu.removeItem(swissRollCake);
+        assertFalse(menu.getBakedGoods().contains(swissRollCake));
+        assertEquals(0, menu.getNumberOfBakedGoods());
+
+        // remove the drink and confirms it is not on the menu anymore
+        menu.removeItem(brownSugarMilkTea);
         assertFalse(menu.getDrinks().contains(brownSugarMilkTea));
         assertEquals(0, menu.getNumberOfDrinks());
     }
 
     @Test
-    public void testDontRemoveDrinks() {
+    public void testDontRemoveItem() {
         // remove an item that is not added to the menu
         assertFalse(menu.getDrinks().contains(blackCoffee));
         menu.removeDrinks(blackCoffee);
-    }
 
-    @Test
-    public void testRemoveBakedGoods() {
-        menu.addItem(swissRollCake);
-        assertTrue(menu.getBakedGoods().contains(swissRollCake));
-        assertEquals(1, menu.getNumberOfBakedGoods());
-
-        // remove the baked good item and confirms it is not on the menu anymore
-        menu.removeBakedGoods(swissRollCake);
-        assertFalse(menu.getBakedGoods().contains(swissRollCake));
-        assertEquals(0, menu.getNumberOfBakedGoods());
-    }
-
-    @Test
-    public void testDontRemoveBakedGoods() {
-        // remove an item that is not added to the menu
+        // remove a second item that is not added to the menu
         assertFalse(menu.getBakedGoods().contains(croissant));
-        menu.removeBakedGoods(croissant);
+        menu.removeItem(croissant);
     }
 }
