@@ -5,9 +5,11 @@ import model.ShoppingCart;
 import model.item.BakedGoods;
 import model.item.Drinks;
 import model.item.Item;
+import persistence.JsonReader;
 import persistence.JsonWriter;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 /*
@@ -31,9 +33,9 @@ public class CustomerInterface {
     // EFFECTS: processes user input
     public void loadCustomerInterface() {
         shoppingCart = new ShoppingCart();
-        menu = new MyMenu();
         in = new Scanner(System.in);
         runProgram = true;
+        loadMenu();
 
         while (runProgram) {
             loadInstructions();
@@ -149,7 +151,24 @@ public class CustomerInterface {
             JsonWriter writer = new JsonWriter(DIRECTORY);
             writer.write(menu);
         } catch (FileNotFoundException e) {
-            System.out.println("Unable to save to: ");
+            System.out.println("Unable to save to: " + DIRECTORY);
+        }
+    }
+
+    // The method loadMenu() is based on the following Github code
+    // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
+    // MODIFIES: this
+    // EFFECTS: loads menu from file if it exists
+    //         otherwise, exit the program.
+    private void loadMenu() {
+        try {
+            JsonReader jsonReader = new JsonReader(DIRECTORY);
+            menu = jsonReader.read();
+            System.out.println("Loaded menu from " + DIRECTORY);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + DIRECTORY);
+            System.out.println("Please contact the manager to fix the issue. Sorry for the inconvenience.");
+            runProgram = false;
         }
     }
 }

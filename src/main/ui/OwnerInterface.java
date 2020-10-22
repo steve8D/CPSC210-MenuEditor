@@ -3,9 +3,11 @@ package ui;
 import model.MyMenu;
 import model.item.BakedGoods;
 import model.item.Drinks;
+import persistence.JsonReader;
 import persistence.JsonWriter;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 /*
@@ -27,7 +29,7 @@ public class OwnerInterface {
     // MODIFIES: this
     // EFFECTS: loads the owner interface
     public void loadOwnerInterface() {
-        menu = new MyMenu();
+        loadMenu();
         in = new Scanner(System.in);
         runProgram = true;
         while (runProgram) {
@@ -286,14 +288,19 @@ public class OwnerInterface {
         }
     }
 
-//    public void loadMenu() {
-//        try {
-//            JsonReader reader = new JsonReader(DIRECTORY);
-//            reader.read(menu);
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
+    // The method loadMenu() is based on the following Github code
+    // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
+    // MODIFIES: this
+    // EFFECTS: loads menu from file if file exists,
+    //      otherwise, create a new empty menu.
+    private void loadMenu() {
+        try {
+            JsonReader jsonReader = new JsonReader(DIRECTORY);
+            menu = jsonReader.read();
+            System.out.println("Loaded menu from " + DIRECTORY);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + DIRECTORY + ". Opening a new menu file.");
+            menu = new MyMenu();
+        }
+    }
 }

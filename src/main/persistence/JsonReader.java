@@ -16,7 +16,7 @@ import java.util.stream.Stream;
 // The implementation of JsonReader is based on the following Github code
 // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
 public class JsonReader {
-    private String source;
+    private final String source;
     private MyMenu menu;
 
     public JsonReader(String source) {
@@ -44,7 +44,7 @@ public class JsonReader {
     }
 
     // MODIFIES: menu
-    // EFFECTS: parses items from JSON object and adds them to the menu
+    // EFFECTS: parses food items from JSON object
     private MyMenu getItems(MyMenu menu, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("items");
         for (Object json : jsonArray) {
@@ -56,7 +56,7 @@ public class JsonReader {
 
 
     // MODIFIES: menu
-    // EFFECTS: parses an (1) item from JSON object and adds it to the menu
+    // EFFECTS: parses one(1) food item from JSON object and adds it to the menu
     private void addItem(MyMenu menu, JSONObject jsonObject) {
         Item i = null;
         int quantity = jsonObject.getInt("quantity");
