@@ -159,7 +159,7 @@ public class CustomerInterface {
     // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
     // MODIFIES: this
     // EFFECTS: loads menu from file if it exists
-    //         otherwise, exit the program.
+    //         otherwise, throw IOException and exit the program.
     private void loadMenu() {
         try {
             JsonReader jsonReader = new JsonReader(DIRECTORY);

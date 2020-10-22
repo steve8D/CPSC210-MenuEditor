@@ -292,7 +292,7 @@ public class OwnerInterface {
     // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
     // MODIFIES: this
     // EFFECTS: loads menu from file if file exists,
-    //      otherwise, create a new empty menu.
+    //      otherwise, throw IOException and create a new empty menu.
     private void loadMenu() {
         try {
             JsonReader jsonReader = new JsonReader(DIRECTORY);
