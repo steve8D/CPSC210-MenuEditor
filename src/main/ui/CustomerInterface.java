@@ -145,7 +145,8 @@ public class CustomerInterface {
     // The method saveMenu() is based on the following Github code
     // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
     // MODIFIES: this
-    // EFFECTS: save the menu to file
+    // EFFECTS: save the menu to file if the directory exists
+    //      otherwise, throw FileNotFound exception
     public void saveMenu() {
         try {
             JsonWriter writer = new JsonWriter(DIRECTORY);

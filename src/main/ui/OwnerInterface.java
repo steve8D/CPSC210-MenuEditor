@@ -199,7 +199,7 @@ public class OwnerInterface {
             menu = jsonReader.read();
             System.out.println("Loaded menu from " + DIRECTORY);
         } catch (IOException e) {
-            System.out.println("Unable to read from file: " + DIRECTORY + ". Opening a new menu file.");
+            System.out.println("Unable to read from file: " + DIRECTORY + ". Starting a new menu file.");
             menu = new MyMenu();
         }
     }
