@@ -1,0 +1,20 @@
+{"items": [
+    {
+        "quantity": 100,
+        "price": 6,
+        "name": "gold martini",
+        "category": "drink"
+    },
+    {
+        "quantity": 50,
+        "price": 2.5,
+        "name": "gold cupcake",
+        "category": "bakedgoods"
+    },
+    {
+        "quantity": 800,
+        "price": 10,
+        "name": "Milk Tea",
+        "category": "drink"
+    }
+]}
