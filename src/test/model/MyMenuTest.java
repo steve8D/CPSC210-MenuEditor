@@ -35,6 +35,10 @@ public class MyMenuTest {
         menu.addItem(blackCoffee);
         menu.addItem(croissant);
         menu.addItem(swissRollCake);
+        assertTrue(menu.getDrinks().contains(brownSugarMilkTea));
+        assertTrue(menu.getDrinks().contains(blackCoffee));
+        assertTrue(menu.getBakedGoods().contains(croissant));
+        assertTrue(menu.getBakedGoods().contains(swissRollCake));
         assertEquals(2, menu.getNumberOfDrinks());
         assertEquals(2, menu.getNumberOfBakedGoods());
     }
@@ -102,7 +106,7 @@ public class MyMenuTest {
     public void testDontRemoveItem() {
         // remove an item that is not added to the menu
         assertFalse(menu.getDrinks().contains(blackCoffee));
-        menu.removeDrinks(blackCoffee);
+        menu.removeItem(blackCoffee);
 
         // remove a second item that is not added to the menu
         assertFalse(menu.getBakedGoods().contains(croissant));

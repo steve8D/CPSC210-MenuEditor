@@ -65,18 +65,6 @@ public class MyMenu {
         items.remove(i);
     }
 
-    // MODIFIES: this
-    // EFFECTS: remove the drink item from the menu
-    public void removeDrinks(Drinks i) {
-        items.remove(i);
-    }
-
-    // MODIFIES: this
-    // EFFECTS: remove the baked goods item from the menu
-    public void removeBakedGoods(BakedGoods i) {
-        items.remove(i);
-    }
-
     // EFFECTS: returns number of drink items
     public int getNumberOfDrinks() {
         int ans = 0;
