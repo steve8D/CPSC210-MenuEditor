@@ -13,6 +13,10 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.stream.Stream;
 
+/*
+    Represents a file reader that reads the menu stored in JSON format
+ */
+
 // The implementation of JsonReader is based on the following Github code
 // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
 public class JsonReader {
@@ -23,7 +27,7 @@ public class JsonReader {
         this.source = source;
     }
 
-    // EFFECTS: reads workroom from file and returns it;
+    // EFFECTS: reads menu from file and returns it;
     // throws IOException if an error occurs reading data from file
     public MyMenu read() throws IOException {
         String jsonData = readFile(source);
@@ -56,7 +60,7 @@ public class JsonReader {
 
 
     // MODIFIES: menu
-    // EFFECTS: parses one(1) food item from JSON object and adds it to the menu
+    // EFFECTS: parses one food item from JSON object and adds it to the menu
     private void addItem(MyMenu menu, JSONObject jsonObject) {
         Item i = null;
         int quantity = jsonObject.getInt("quantity");

@@ -26,7 +26,7 @@ public class ShoppingCart {
         return shoppingCart;
     }
 
-    // MODIFIES: this
+    // MODIFIES: this and Item
     // EFFECTS: adds item to the shopping cart if item is still in stock
     //         otherwise returns silently
     public void addItem(Item i) {
@@ -36,7 +36,7 @@ public class ShoppingCart {
         }
     }
 
-    // MODIFIES: this
+    // MODIFIES: this and Item
     // EFFECTS: remove Item i from the shopping cart
     public void removeItem(Item i) {
         shoppingCart.remove(i);

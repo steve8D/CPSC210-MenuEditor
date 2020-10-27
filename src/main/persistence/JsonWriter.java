@@ -5,6 +5,10 @@ import model.MyMenu;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 
+/*
+    Represents a file writer that translates the menu to JSON format and stores it in the file
+ */
+
 // The implementation of JsonWriter is based on the following Github code
 // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
 public class JsonWriter {

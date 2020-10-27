@@ -9,9 +9,9 @@ public abstract class Item {
     private String name;
     private int quantity;
 
-    // constructs an item on the menu
-    // REQUIRES: price > 0, quantity >= 0
-    // EFFECTS: constructs an item on the menu
+    // EFFECTS: constructs an item if price is larger than 0 and
+    //        quantity is larger or equal to 0
+    //        otherwise, silently returns
     public Item(String name, double price, int quantity) {
         if (price > 0 && quantity >= 0) {
             this.price = price;
@@ -25,9 +25,9 @@ public abstract class Item {
         return price;
     }
 
-    // REQUIRES: price > 0
     // MODIFIES: this
-    // EFFECTS: sets item to price
+    // EFFECTS: sets item to price if price is larger than 0
+    //         otherwise, silently returns
     public void setPrice(double price) {
         if (price > 0) {
             this.price = price;

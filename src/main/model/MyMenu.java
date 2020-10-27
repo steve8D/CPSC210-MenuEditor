@@ -13,10 +13,6 @@ import java.util.ArrayList;
  */
 
 public class MyMenu {
-
-    // Combine into one list
-//    private ArrayList<Drinks> drinks;
-//    private ArrayList<BakedGoods> bakedGoods;
     private final ArrayList<Item> items;
 
     // EFFECTS: construct empty lists of drinks items and baked goods items
@@ -88,7 +84,8 @@ public class MyMenu {
     }
 
     // MODIFIES: this
-    // EFFECTS: returns lists of items on menu as JSON format
+    // EFFECTS: convert lists of items on menu into a JSON array
+    //          and returns the menu as a JSON Object
     public JSONObject toJson() {
         JSONArray jsonMenu = new JSONArray();
         for (Item i: items) {
