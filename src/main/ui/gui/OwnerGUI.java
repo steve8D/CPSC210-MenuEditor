@@ -1,19 +1,27 @@
 package ui.gui;
 
-import model.item.BakedGoods;
 import model.item.Drinks;
 import model.item.Item;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 
 public class OwnerGUI {
     JFrame frame = new JFrame();
+    JList<Item> list = new JList<>();
+    private ArrayList<DefaultListModel<Item>> models = new ArrayList<>();
 
     // EFFECTS: initialise the menu
     public OwnerGUI() {
         init();
+        models.add(new DefaultListModel<>());
+        models.add(new DefaultListModel<>());
+        models.get(0).addElement(new Drinks("Tea1", 2.5, 25));
+        models.get(1).addElement(new Drinks("Tea", 2.5, 25));
     }
 
     private void init() {
@@ -22,8 +30,10 @@ public class OwnerGUI {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         frame.add(welcomeHeader(), BorderLayout.PAGE_START);
-        frame.add(menuList());
-        frame.add(itemPanel(), BorderLayout.PAGE_END);
+        frame.add(menuCategories());
+        frame.add(menuList(), BorderLayout.PAGE_END);
+//        frame.add(itemPanel(), BorderLayout.PAGE_END);
+
 
         frame.pack();
         frame.setVisible(true);
@@ -34,17 +44,9 @@ public class OwnerGUI {
     // EFFECTS: Initialize a split panel including the item names on the left hand side
     // and the price and quantity on the right hand side
     private JComponent menuList() {
-        JList<Item> list = new JList<>();
-        DefaultListModel<Item> model = new DefaultListModel<>();
         JPanel panel = new JPanel();
         JLabel label = new JLabel();
         JSplitPane splitPane = new JSplitPane();
-
-
-        list.setModel(model);
-
-        model.addElement(new BakedGoods("Tiramisu", 10, 25));
-        model.addElement(new Drinks("Tea", 2.5, 25));
 
         list.getSelectionModel().addListSelectionListener(e -> {
             Item p = list.getSelectedValue();
@@ -110,6 +112,20 @@ public class OwnerGUI {
         panel.add(quantityField);
         panel.add(addButton);
         panel.add(removeButton);
+        return panel;
+    }
+
+    private JComponent menuCategories() {
+        JPanel panel = new JPanel();
+        String[] menuCategories = {"Drinks", "Baked Goods"};
+        JComboBox chooseCategory = new JComboBox(menuCategories);
+        chooseCategory.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                int i = chooseCategory.getSelectedIndex();
+                list.setModel(models.get(i));
+            }
+        });
+        panel.add(chooseCategory);
         return panel;
     }
 }
