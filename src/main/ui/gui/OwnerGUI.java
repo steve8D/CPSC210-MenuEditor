@@ -7,32 +7,39 @@ import model.item.Item;
 import javax.swing.*;
 import java.awt.*;
 
-// The implementation of Java Swing Split panel comes from:
-// https://github.com/BranislavLazic/SwingTutorials
+
 public class OwnerGUI {
-    JList<Item> list = new JList<>();
-    DefaultListModel<Item> model = new DefaultListModel<>();
     JFrame frame = new JFrame();
 
-    // EFFECTS: intialise the menu
+    // EFFECTS: initialise the menu
     public OwnerGUI() {
         init();
     }
 
     private void init() {
         frame.setTitle("Bakery Store Manager Application");
+        frame.setPreferredSize(new Dimension(400, 400));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
         frame.add(welcomeHeader(), BorderLayout.PAGE_START);
         frame.add(menuList());
+        frame.add(itemPanel(), BorderLayout.PAGE_END);
+
+        frame.pack();
         frame.setVisible(true);
     }
 
+    // The implementation of Java Swing Split panel comes from:
+    // https://github.com/BranislavLazic/SwingTutorials
     // EFFECTS: Initialize a split panel including the item names on the left hand side
     // and the price and quantity on the right hand side
     private JComponent menuList() {
+        JList<Item> list = new JList<>();
+        DefaultListModel<Item> model = new DefaultListModel<>();
         JPanel panel = new JPanel();
         JLabel label = new JLabel();
         JSplitPane splitPane = new JSplitPane();
+
 
         list.setModel(model);
 
@@ -41,8 +48,8 @@ public class OwnerGUI {
 
         list.getSelectionModel().addListSelectionListener(e -> {
             Item p = list.getSelectedValue();
-            label.setText("Name: " + p.getName() + " ::: "
-                        + p.getPrice() + " ::: " + p.getQuantity());
+            label.setText("Name: " + p.getName() + " ::: Price: "
+                        + p.getPrice() + " ::: Quantity: " + p.getQuantity());
         });
 
         splitPane.setLeftComponent(new JScrollPane(list));
@@ -67,6 +74,42 @@ public class OwnerGUI {
         label.setHorizontalAlignment(JLabel.CENTER);
 
         panel.add(label);
+        return panel;
+    }
+
+    private JComponent itemPanel() {
+        JPanel panel = new JPanel();
+        JLabel label = new JLabel();
+        JButton addButton = new JButton();
+        JButton removeButton = new JButton();
+
+        // Name field
+        JTextField nameField = new JTextField();
+        nameField.setColumns(10);
+
+        // Price fields
+        JFormattedTextField priceField = new JFormattedTextField();
+        priceField.setValue(new Double(0));
+        priceField.setColumns(10);
+//        priceField.addPropertyChangeListener("price", (PropertyChangeListener) this);
+
+        // Quantity fields
+        JFormattedTextField quantityField = new JFormattedTextField();
+        quantityField.setValue(new Double(0));
+        quantityField.setColumns(10);
+//        quantityField.addPropertyChangeListener("quantity", this);
+
+        // Add button
+        addButton.setText("Add");
+
+        // Remove button
+        removeButton.setText("Remove");
+
+        panel.add(nameField);
+        panel.add(priceField);
+        panel.add(quantityField);
+        panel.add(addButton);
+        panel.add(removeButton);
         return panel;
     }
 }
