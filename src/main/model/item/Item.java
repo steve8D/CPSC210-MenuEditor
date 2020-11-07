@@ -10,11 +10,11 @@ public abstract class Item {
     private int quantity;
 
     // EFFECTS: constructs an item with price = 0 and quantity = 0
-    public Item(String name) {
-        this.name = name;
-        this.price = 0;
-        this.quantity = 0;
-    }
+//    public Item(String name) {
+//        this.name = name;
+//        this.price = 0;
+//        this.quantity = 0;
+//    }
 
     // EFFECTS: constructs an item if price is larger than 0 and
     //        quantity is larger or equal to 0
