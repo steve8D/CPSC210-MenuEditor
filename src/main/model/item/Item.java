@@ -11,8 +11,8 @@ public abstract class Item {
 
     // EFFECTS: constructs an item with price = 0 and quantity = 0
     public Item(String name) {
-        this.price = 0;
         this.name = name;
+        this.price = 0;
         this.quantity = 0;
     }
 
@@ -63,5 +63,10 @@ public abstract class Item {
     // EFFECTS: returns true if the item's quantity is equal to zero, otherwise returns false.
     public boolean isOutOfStock() {
         return quantity == 0;
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }

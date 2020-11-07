@@ -54,7 +54,7 @@ public class OwnerGUI {
 
     // EFFECTS: initialize a header including a welcome message and photo
     private JComponent welcomeHeader() {
-        // Icon from https://www.flaticon.com/free-icon/coffee-cup_633652#
+        // Icon downloaded from https://www.flaticon.com/free-icon/coffee-cup_633652#
         ImageIcon image = new ImageIcon("data/coffee-cup.png");
         JPanel panel = new JPanel();
         JLabel label = new JLabel();
