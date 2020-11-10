@@ -12,6 +12,8 @@ import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -40,7 +42,8 @@ public class OwnerGUI {
         frame = new JFrame();
         frame.setTitle("Bakery Store Manager Application");
         frame.setPreferredSize(new Dimension(700, 400));
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        frame.addWindowListener(new SaveOnCloseWindowListener());
         models.add(new DefaultListModel<>());
         models.add(new DefaultListModel<>());
         loadMenu();
@@ -53,8 +56,6 @@ public class OwnerGUI {
         frame.setVisible(true);
     }
 
-    // The implementation of Java Swing Split panel comes from:
-    // https://github.com/BranislavLazic/SwingTutorials
     // EFFECTS: Initialize a split panel including the item names on the left hand side
     // and the price and quantity on the right hand side
     private JComponent menuList() {
@@ -156,7 +157,6 @@ public class OwnerGUI {
         }
     }
 
-    // https://docs.oracle.com/javase/tutorial/uiswing/examples/components/ListDemoProject/src/components/ListDemo.java
     private class AddItem implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -186,6 +186,19 @@ public class OwnerGUI {
             nameField.setText("");
             priceField.setValue(0);
             quantityField.setValue(0);
+        }
+    }
+
+    private class SaveOnCloseWindowListener extends WindowAdapter {
+        @Override
+        public void windowClosing(WindowEvent e) {
+//            int result = JOptionPane.showConfirmDialog(null, "Are you sure,"
+//                    + "Confirm", String.valueOf(JOptionPane.YES_NO_OPTION),JOptionPane.QUESTION_MESSAGE);
+//            if (result == JOptionPane.YES_OPTION) {
+//                System.exit(0);
+//            } else {
+//                //Do nothing
+//            }
         }
     }
 }
