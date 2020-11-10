@@ -1,8 +1,10 @@
 package ui.gui;
 
+import model.MyMenu;
 import model.item.BakedGoods;
 import model.item.Drinks;
 import model.item.Item;
+import persistence.JsonReader;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -10,21 +12,24 @@ import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.ArrayList;
 
 
 public class OwnerGUI {
     // starting the categories of the menu
-    JFrame frame;
-    String[] menuCategories = {"Drinks", "Baked Goods"};
-    JList<Item> list = new JList<>();
-    ArrayList<DefaultListModel<Item>> models = new ArrayList<>();
+    private JFrame frame;
+    private String[] menuCategories = {"Drinks", "Baked Goods"};
+    private JList<Item> list = new JList<>();
+    private ArrayList<DefaultListModel<Item>> models = new ArrayList<>();
 
     // components for adding item
-    JTextField nameField;
-    JFormattedTextField priceField;
-    JFormattedTextField quantityField;
-    JComboBox category;
+    private JTextField nameField;
+    private JFormattedTextField priceField;
+    private JFormattedTextField quantityField;
+    private JComboBox category;
+    private MyMenu menu;
+    private static final String DIRECTORY = "./data/NewMenu.json";
 
     // EFFECTS: initialise the menu
     public OwnerGUI() {
@@ -38,8 +43,7 @@ public class OwnerGUI {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         models.add(new DefaultListModel<>());
         models.add(new DefaultListModel<>());
-        models.get(0).addElement(new Drinks("Tea1", 2.5, 25));
-        models.get(1).addElement(new Drinks("Tea", 2.5, 25));
+        loadMenu();
 
         frame.add(welcomeHeader(), BorderLayout.PAGE_START);
         frame.add(menuList());
@@ -134,8 +138,26 @@ public class OwnerGUI {
         return panel;
     }
 
+    private void loadMenu() {
+        try {
+            JsonReader jsonReader = new JsonReader(DIRECTORY);
+            menu = jsonReader.read();
+            for (Item i : menu.getItems()) {
+                if (i instanceof Drinks) {
+                    models.get(0).addElement(new Drinks(i.getName(), i.getPrice(), i.getQuantity()));
+                } else {
+                    models.get(1).addElement(new BakedGoods(i.getName(), i.getPrice(), i.getQuantity()));
+                }
+            }
+            System.out.println("Loaded menu from " + DIRECTORY);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + DIRECTORY + ". Starting a new menu file.");
+            menu = new MyMenu();
+        }
+    }
+
     // https://docs.oracle.com/javase/tutorial/uiswing/examples/components/ListDemoProject/src/components/ListDemo.java
-    class AddItem implements ActionListener {
+    private class AddItem implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             String name = nameField.getText();
@@ -146,22 +168,21 @@ public class OwnerGUI {
             //User didn't type in a unique name...
             if (name.equals("") || price == 0 || quantity == 0) {
                 Toolkit.getDefaultToolkit().beep();
-                nameField.requestFocusInWindow();
-                nameField.selectAll();
                 return;
             }
 
             switch (categorySelected) {
                 case 0:
                     models.get(0).addElement(new Drinks(name, price, quantity));
+                    menu.addItem(new Drinks(name, price, quantity));
                     break;
                 default:
                     models.get(1).addElement(new BakedGoods(name, price, quantity));
+                    menu.addItem(new BakedGoods(name, price, quantity));
                     break;
             }
 
             //Reset the text field.
-            nameField.requestFocusInWindow();
             nameField.setText("");
             priceField.setValue(0);
             quantityField.setValue(0);
