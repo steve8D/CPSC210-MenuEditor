@@ -1,5 +1,6 @@
 package ui.gui;
 
+import model.item.BakedGoods;
 import model.item.Drinks;
 import model.item.Item;
 
@@ -13,15 +14,17 @@ import java.util.ArrayList;
 
 
 public class OwnerGUI {
-    JFrame frame = new JFrame();
-    JLabel label;
-    JButton addButton;
-    JButton removeButton;
-    JComboBox chooseCategory;
+    // starting the categories of the menu
+    JFrame frame;
     String[] menuCategories = {"Drinks", "Baked Goods"};
     JList<Item> list = new JList<>();
+    ArrayList<DefaultListModel<Item>> models = new ArrayList<>();
+
+    // components for adding item
     JTextField nameField;
-    private ArrayList<DefaultListModel<Item>> models = new ArrayList<>();
+    JFormattedTextField priceField;
+    JFormattedTextField quantityField;
+    JComboBox category;
 
     // EFFECTS: initialise the menu
     public OwnerGUI() {
@@ -29,6 +32,7 @@ public class OwnerGUI {
     }
 
     private void init() {
+        frame = new JFrame();
         frame.setTitle("Bakery Store Manager Application");
         frame.setPreferredSize(new Dimension(700, 400));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -51,7 +55,7 @@ public class OwnerGUI {
     // and the price and quantity on the right hand side
     private JComponent menuList() {
         JPanel panel = new JPanel();
-        label = new JLabel();
+        JLabel label = new JLabel();
         JSplitPane splitPane = new JSplitPane();
 
         list.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
@@ -59,7 +63,7 @@ public class OwnerGUI {
             public void valueChanged(ListSelectionEvent e) {
                 if (e.getValueIsAdjusting()) {
                     Item p = list.getSelectedValue();
-                    label.setText(p.getName());
+                    label.setText(p.getName() + ". Price: " + p.getPrice() + ". Quantity: " + p.getQuantity());
                 }
             }
         });
@@ -88,42 +92,40 @@ public class OwnerGUI {
 
     private JComponent itemPanel() {
         JPanel panel = new JPanel();
-        addButton = new JButton();
-//        removeButton = new JButton();
+        JButton addButton = new JButton();
 
         // Name field
         nameField = new JTextField();
         nameField.setColumns(10);
 
         // Price fields
-        JFormattedTextField priceField = new JFormattedTextField();
+        priceField = new JFormattedTextField();
         priceField.setValue(new Double(0));
         priceField.setColumns(10);
 
         // Quantity fields
-        JFormattedTextField quantityField = new JFormattedTextField();
-        quantityField.setValue(new Double(0));
+        quantityField = new JFormattedTextField();
+        quantityField.setValue(new Integer(0));
         quantityField.setColumns(10);
+
+        // Category field
+        category = new JComboBox(menuCategories);
 
         // Add button
         addButton.setText("Add");
         addButton.addActionListener(new AddItem());
 
-        // Remove button
-//        removeButton.setText("Remove");
-//        removeButton.addActionListener(new RemoveItem());
-
         panel.add(nameField);
         panel.add(priceField);
         panel.add(quantityField);
+        panel.add(category);
         panel.add(addButton);
-//        panel.add(removeButton);
         return panel;
     }
 
     private JComponent menuCategories() {
         JPanel panel = new JPanel();
-        chooseCategory = new JComboBox(menuCategories);
+        JComboBox chooseCategory = new JComboBox(menuCategories);
         chooseCategory.addActionListener(e -> {
             int i = chooseCategory.getSelectedIndex();
             list.setModel(models.get(i));
@@ -137,31 +139,32 @@ public class OwnerGUI {
         @Override
         public void actionPerformed(ActionEvent e) {
             String name = nameField.getText();
+            double price = (double) priceField.getValue();
+            int quantity = (int) quantityField.getValue();
+            int categorySelected = category.getSelectedIndex();
 
             //User didn't type in a unique name...
-            if (name.equals("")) {
+            if (name.equals("") || price == 0 || quantity == 0) {
                 Toolkit.getDefaultToolkit().beep();
                 nameField.requestFocusInWindow();
                 nameField.selectAll();
                 return;
             }
 
-            int index = list.getSelectedIndex(); //get selected index
-            if (index == -1) { //no selection, so insert at beginning
-                index = 0;
-            } else {           //add after the selected item
-                index++;
+            switch (categorySelected) {
+                case 0:
+                    models.get(0).addElement(new Drinks(name, price, quantity));
+                    break;
+                default:
+                    models.get(1).addElement(new BakedGoods(name, price, quantity));
+                    break;
             }
-
-            models.get(0).addElement(new Drinks(name, 2, 2));
 
             //Reset the text field.
             nameField.requestFocusInWindow();
             nameField.setText("");
-
-            //Select the new item and make it visible.
-            list.setSelectedIndex(index);
-            list.ensureIndexIsVisible(index);
+            priceField.setValue(0);
+            quantityField.setValue(0);
         }
     }
 }
