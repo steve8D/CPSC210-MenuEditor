@@ -5,6 +5,7 @@ import model.item.BakedGoods;
 import model.item.Drinks;
 import model.item.Item;
 import persistence.JsonReader;
+import persistence.JsonWriter;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -12,6 +13,8 @@ import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -30,7 +33,6 @@ public class OwnerGUI {
     private JFormattedTextField quantityField;
     private JComboBox category;
 
-    // EFFECTS: initialise the menu
     public OwnerGUI() {
         init();
     }
@@ -39,9 +41,7 @@ public class OwnerGUI {
         JFrame frame = new JFrame();
         frame.setTitle("Bakery Store Manager Application");
         frame.setPreferredSize(new Dimension(700, 400));
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         for (int i = 0; i < menuCategories.length; i++) {
-            models.add(new DefaultListModel<>());
             models.add(new DefaultListModel<>());
         }
         loadMenu();
@@ -49,6 +49,12 @@ public class OwnerGUI {
         frame.add(welcomeHeader(), BorderLayout.PAGE_START);
         frame.add(menuList());
         frame.add(itemPanel(), BorderLayout.PAGE_END);
+
+        frame.addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                exit();
+            }
+        });
 
         frame.pack();
         frame.setVisible(true);
@@ -154,6 +160,32 @@ public class OwnerGUI {
             menu = new MyMenu();
         }
     }
+
+    // https://github.students.cs.ubc.ca/CPSC210/SampleMidtermRepos/tree/master/JDrawing
+    public void exit() {
+        int userSays = JOptionPane.showConfirmDialog(null,"save before exiting ?",
+                "Exits from the program",JOptionPane.YES_NO_CANCEL_OPTION);
+        if (userSays == JOptionPane.CANCEL_OPTION) {
+            return;
+        } else if (userSays == JOptionPane.YES_OPTION) {
+            saveMenu();
+        }
+        System.exit(0);
+    }
+
+    // The method saveMenu() is based on the following Github code
+    // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
+    // MODIFIES: this
+    // EFFECTS: save the menu to file
+    private void saveMenu() {
+        try {
+            JsonWriter writer = new JsonWriter(DIRECTORY);
+            writer.write(menu);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to save to: ");
+        }
+    }
+
 
     private class AddItem implements ActionListener {
         @Override
