@@ -7,12 +7,6 @@ package model.item;
 import org.json.JSONObject;
 
 public class Drinks extends Item {
-
-    // EFFECTS: constructs an item of category drinks with price and quantity equal to zero
-//    public Drinks(String name) {
-//        super(name);
-//    }
-
     // EFFECTS: constructs an item of category drinks
     public Drinks(String name, double price, int quantity) {
         super(name, price, quantity);

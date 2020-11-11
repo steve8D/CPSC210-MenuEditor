@@ -34,10 +34,6 @@ public class OwnerGUI {
     private JComboBox category;
 
     public OwnerGUI() {
-        init();
-    }
-
-    private void init() {
         JFrame frame = new JFrame();
         frame.setTitle("Bakery Store Manager Application");
         frame.setPreferredSize(new Dimension(700, 400));
@@ -50,6 +46,7 @@ public class OwnerGUI {
         frame.add(menuList());
         frame.add(itemPanel(), BorderLayout.PAGE_END);
 
+        // https://github.students.cs.ubc.ca/CPSC210/SampleMidtermRepos/tree/master/JDrawing
         frame.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(WindowEvent e) {
                 exit();
@@ -61,7 +58,7 @@ public class OwnerGUI {
     }
 
     // EFFECTS: Initialize a split panel including the item names on the left hand side
-    // and the price and quantity on the right hand side
+    // and display item's attributes on the right hand side
     private JComponent menuList() {
         JPanel panel = new JPanel();
         JLabel label = new JLabel();
@@ -84,7 +81,7 @@ public class OwnerGUI {
         return splitPane;
     }
 
-    // EFFECTS: initialize a header including a welcome message and photo
+    // EFFECTS: initialize a welcome message and icon
     private JComponent welcomeHeader() {
         // Icon downloaded from https://www.flaticon.com/free-icon/coffee-cup_633652#
         ImageIcon image = new ImageIcon("data/coffee-cup.png");
@@ -99,6 +96,7 @@ public class OwnerGUI {
         return panel;
     }
 
+    // EFFECTS: creates categories of the menu, each showing a list of items in that category.
     private JComponent itemPanel() {
         JPanel panel = new JPanel();
         JButton addButton = new JButton();
@@ -132,6 +130,8 @@ public class OwnerGUI {
         return panel;
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates categories of the menu, each showing a list of items in that category.
     private JComponent menuCategories() {
         JPanel panel = new JPanel();
         JComboBox chooseCategory = new JComboBox(menuCategories);
@@ -143,6 +143,9 @@ public class OwnerGUI {
         return panel;
     }
 
+    // MODIFIES: MyMenu, this
+    // EFFECTS: loads menu from file if file exists,
+    //      otherwise, throw IOException and create a new empty menu.
     private void loadMenu() {
         try {
             JsonReader jsonReader = new JsonReader(DIRECTORY);
@@ -154,14 +157,13 @@ public class OwnerGUI {
                     models.get(1).addElement(new BakedGoods(i.getName(), i.getPrice(), i.getQuantity()));
                 }
             }
-            System.out.println("Loaded menu from " + DIRECTORY);
         } catch (IOException e) {
-            System.out.println("Unable to read from file: " + DIRECTORY + ". Starting a new menu file.");
             menu = new MyMenu();
         }
     }
 
     // https://github.students.cs.ubc.ca/CPSC210/SampleMidtermRepos/tree/master/JDrawing
+    // EFFECTS: creates a pop up that asks user input to save the file.
     public void exit() {
         int userSays = JOptionPane.showConfirmDialog(null,"save before exiting ?",
                 "Exits from the program",JOptionPane.YES_NO_CANCEL_OPTION);
@@ -182,11 +184,14 @@ public class OwnerGUI {
             JsonWriter writer = new JsonWriter(DIRECTORY);
             writer.write(menu);
         } catch (FileNotFoundException e) {
-            System.out.println("Unable to save to: ");
+            System.out.println("Unable to save to: " + DIRECTORY);
         }
     }
 
-
+    // EFFECTS: priceField > 0
+    //          quantityField > 0
+    // MODIFIES: this
+    // EFFECTS: add item to the menu from user inputs.
     private class AddItem implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {

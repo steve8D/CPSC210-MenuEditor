@@ -62,14 +62,14 @@ public class JsonReader {
     // MODIFIES: menu
     // EFFECTS: parses one food item from JSON object and adds it to the menu
     private void addItem(MyMenu menu, JSONObject jsonObject) {
-        Item i = null;
+        Item i;
         int quantity = jsonObject.getInt("quantity");
         double price = jsonObject.getDouble("price");
         String name = jsonObject.getString("name");
         String category = jsonObject.getString("category");
         if (category.equals("drink")) {
             i = new Drinks(name, price, quantity);
-        } else if (category.equals("bakedgoods")) {
+        } else {
             i = new BakedGoods(name, price, quantity);
         }
         menu.addItem(i);
