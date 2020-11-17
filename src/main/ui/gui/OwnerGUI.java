@@ -57,8 +57,8 @@ public class OwnerGUI {
         frame.setVisible(true);
     }
 
-    // EFFECTS: Initialize a split panel including the item names on the left hand side
-    // and display item's attributes on the right hand side
+    // EFFECTS: Output a split panel including the item names on the left hand side
+    // and display item's attributes on the right hand side that changes upon user selection.
     private JComponent menuList() {
         JPanel panel = new JPanel();
         JLabel label = new JLabel();
@@ -73,9 +73,9 @@ public class OwnerGUI {
                 }
             }
         });
+        panel.add(label);
 
         splitPane.setLeftComponent(new JScrollPane(list));
-        panel.add(label);
         splitPane.setRightComponent(panel);
 
         return splitPane;
@@ -96,7 +96,7 @@ public class OwnerGUI {
         return panel;
     }
 
-    // EFFECTS: creates categories of the menu, each showing a list of items in that category.
+    // EFFECTS: create user input fields to determine the attributes of a new item to the menu.
     private JComponent itemPanel() {
         JPanel panel = new JPanel();
         JButton addButton = new JButton();
@@ -131,7 +131,8 @@ public class OwnerGUI {
     }
 
     // MODIFIES: this
-    // EFFECTS: creates categories of the menu, each showing a list of items in that category.
+    // EFFECTS: produces a drop-down list of categories in the menu that
+    // accepts user selection and affect outputs of items in that category.
     private JComponent menuCategories() {
         JPanel panel = new JPanel();
         JComboBox chooseCategory = new JComboBox(menuCategories);
@@ -165,6 +166,7 @@ public class OwnerGUI {
     // https://github.students.cs.ubc.ca/CPSC210/SampleMidtermRepos/tree/master/JDrawing
     // EFFECTS: creates a pop up that asks user input to save the file.
     public void exit() {
+        Toolkit.getDefaultToolkit().beep();
         int userSays = JOptionPane.showConfirmDialog(null,"save before exiting ?",
                 "Exits from the program",JOptionPane.YES_NO_CANCEL_OPTION);
         if (userSays == JOptionPane.CANCEL_OPTION) {
@@ -188,6 +190,10 @@ public class OwnerGUI {
         }
     }
 
+    /*
+    The implementation of adding an item to the list using ActionListener is based on the following documentation
+    https://docs.oracle.com/javase/tutorial/uiswing/examples/components/ListDemoProject/src/components/ListDemo.java
+    */
     // EFFECTS: priceField > 0
     //          quantityField > 0
     // MODIFIES: this
