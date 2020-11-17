@@ -101,6 +101,29 @@ public class OwnerGUI {
         JPanel panel = new JPanel();
         JButton addButton = new JButton();
 
+        // Create labels
+        JLabel nameLabel = new JLabel("Name");
+        JLabel priceLabel = new JLabel("Price");
+        JLabel quantityLabel = new JLabel("Quantity");
+
+        userFields();
+
+        // Add button
+        addButton.setText("Add");
+        addButton.addActionListener(new AddItem());
+
+        panel.add(nameLabel);
+        panel.add(nameField);
+        panel.add(priceLabel);
+        panel.add(priceField);
+        panel.add(quantityLabel);
+        panel.add(quantityField);
+        panel.add(category);
+        panel.add(addButton);
+        return panel;
+    }
+
+    private void userFields() {
         // Name field
         nameField = new JTextField();
         nameField.setColumns(10);
@@ -117,17 +140,6 @@ public class OwnerGUI {
 
         // Category field
         category = new JComboBox(menuCategories);
-
-        // Add button
-        addButton.setText("Add");
-        addButton.addActionListener(new AddItem());
-
-        panel.add(nameField);
-        panel.add(priceField);
-        panel.add(quantityField);
-        panel.add(category);
-        panel.add(addButton);
-        return panel;
     }
 
     // MODIFIES: this
