@@ -60,10 +60,10 @@ public class OwnerGUI {
     // EFFECTS: Output a split panel including the item names on the left hand side
     // and display item's attributes on the right hand side that changes upon user selection.
     private JComponent menuList() {
-        JPanel panel = new JPanel();
-        JLabel label = new JLabel();
         JSplitPane splitPane = new JSplitPane();
 
+        JPanel panel = new JPanel();
+        JLabel label = new JLabel();
         list.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
@@ -81,7 +81,7 @@ public class OwnerGUI {
         return splitPane;
     }
 
-    // EFFECTS: initialize a welcome message and icon
+    // EFFECTS: outputs a coffee logo and welcome message
     private JComponent welcomeHeader() {
         // Icon downloaded from https://www.flaticon.com/free-icon/coffee-cup_633652#
         ImageIcon image = new ImageIcon("data/coffee-cup.png");
@@ -96,7 +96,7 @@ public class OwnerGUI {
         return panel;
     }
 
-    // EFFECTS: create user input fields to determine the attributes of a new item to the menu.
+    // EFFECTS: create a panel that takes user input and add an item to the menu.
     private JComponent itemPanel() {
         JPanel panel = new JPanel();
         JButton addButton = new JButton();
@@ -123,6 +123,7 @@ public class OwnerGUI {
         return panel;
     }
 
+    // EFFECTS: create user input fields to determine the attributes of a new item to the menu.
     private void userFields() {
         // Name field
         nameField = new JTextField();
@@ -176,7 +177,7 @@ public class OwnerGUI {
     }
 
     // https://github.students.cs.ubc.ca/CPSC210/SampleMidtermRepos/tree/master/JDrawing
-    // EFFECTS: creates a pop up that asks user input to save the file.
+    // EFFECTS: creates a pop up that asks user option to save the file.
     public void exit() {
         Toolkit.getDefaultToolkit().beep();
         int userSays = JOptionPane.showConfirmDialog(null,"save before exiting ?",
