@@ -219,7 +219,7 @@ public class OwnerGUI {
             int quantity = (int) quantityField.getValue();
             int categorySelected = category.getSelectedIndex();
             
-            if (name.equals("") || price == 0 || quantity == 0) {
+            if (name.equals("") || price <= 0 || quantity <= 0) {
                 Toolkit.getDefaultToolkit().beep();
                 return;
             }
