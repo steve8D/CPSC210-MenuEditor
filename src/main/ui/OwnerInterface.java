@@ -112,12 +112,12 @@ public class OwnerInterface {
 
             try {
                 modify.setPrice(newPrice);
+                in.nextLine();
+                System.out.println("Price of " + modify.getName() + " is now " + newPrice);
             } catch (NegativeInputException e) {
+                in.nextLine();
                 System.out.println("Sorry you cannot sell an item with a negative price.");
             }
-
-            in.nextLine();
-            System.out.println("Price of " + modify.getName() + " is now " + newPrice);
         }
     }
 
@@ -141,12 +141,12 @@ public class OwnerInterface {
 
             try {
                 modify.setQuantity(newQuantity);
+                in.nextLine();
+                System.out.println("Quantity of " + modify.getName() + " is now " + newQuantity);
             } catch (NegativeInputException e) {
+                in.nextLine();
                 System.out.println("Sorry you cannot create a negative amount of item.");
             }
-
-            in.nextLine();
-            System.out.println("Quantity of " + modify.getName() + " is now " + newQuantity);
         }
     }
 
