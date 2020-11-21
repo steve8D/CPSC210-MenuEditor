@@ -16,3 +16,6 @@ where user can can log in as a customer to add the items into the shopping list 
 ###### Data Persistence User Stories
 - As a user, I want my items on the menu to be saved automatically upon exiting the program.
 - As a user, I want my items on the menu to be load automatically upon opening the program.
+###### Phase 4 Task 2
+- I have chosen to test and design a class in my model package to be robust. 
+- The class Item and its two methods setPrice and setQuantity is redesigned to be robust for the task.

@@ -1,5 +1,6 @@
 package model;
 
+import model.exception.NegativeInputException;
 import model.item.Item;
 
 import java.util.ArrayList;
@@ -32,7 +33,11 @@ public class ShoppingCart {
     public void addItem(Item i) {
         if (!i.isOutOfStock()) {
             shoppingCart.add(i);
-            i.setQuantity(i.getQuantity() - 1);
+            try {
+                i.setQuantity(i.getQuantity() - 1);
+            } catch (NegativeInputException e) {
+                // ignore
+            }
         }
     }
 
@@ -40,7 +45,11 @@ public class ShoppingCart {
     // EFFECTS: remove Item i from the shopping cart
     public void removeItem(Item i) {
         shoppingCart.remove(i);
-        i.setQuantity(i.getQuantity() + 1);
+        try {
+            i.setQuantity(i.getQuantity() + 1);
+        } catch (NegativeInputException e) {
+            // ignore
+        }
     }
 
     // MODIFIES: Item

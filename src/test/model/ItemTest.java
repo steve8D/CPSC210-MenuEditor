@@ -1,5 +1,6 @@
 package model;
 
+import model.exception.NegativeInputException;
 import model.item.BakedGoods;
 import model.item.Drinks;
 import org.junit.jupiter.api.BeforeEach;
@@ -44,27 +45,45 @@ class ItemTest {
 
     @Test
     public void testSetPrice() {
-        coffee.setPrice(1);
+        try {
+            coffee.setPrice(1);
+        } catch (NegativeInputException e) {
+            fail("Exception should not have thrown");
+        }
         assertEquals(1, coffee.getPrice());
     }
 
     @Test
     public void testSetPriceNegative() {
         // Setting the price to a negative number should not change the original price
-        coffee.setPrice(-1);
+        try {
+            coffee.setPrice(-1);
+            fail("Exception should have thrown.");
+        } catch (NegativeInputException e) {
+            // pass
+        }
         assertEquals(2.5, coffee.getPrice());
     }
 
     @Test
     public void testSetQuantity() {
-        coffee.setQuantity(75);
+        try {
+            coffee.setQuantity(75);
+        } catch (NegativeInputException e) {
+            fail("Exception should not have thrown");
+        }
         assertEquals(75, coffee.getQuantity());
     }
 
     @Test
     public void testSetQuantityNegative() {
         // Setting the quantity to a negative number should not change the item's quantity
-        coffee.setQuantity(-1);
+        try {
+            coffee.setQuantity(-1);
+            fail("Exception should have thrown");
+        } catch (NegativeInputException e) {
+            // pass
+        }
         assertEquals(50, coffee.getQuantity());
     }
 
@@ -73,7 +92,11 @@ class ItemTest {
         assertFalse(coffee.isOutOfStock());
 
         // set quantity to 0
-        coffee.setQuantity(0);
+        try {
+            coffee.setQuantity(0);
+        } catch (NegativeInputException e) {
+            // ignore
+        }
         assertTrue(coffee.isOutOfStock());
     }
 }

@@ -1,6 +1,7 @@
 package ui;
 
 import model.MyMenu;
+import model.exception.NegativeInputException;
 import model.item.BakedGoods;
 import model.item.Drinks;
 import model.item.Item;
@@ -108,7 +109,13 @@ public class OwnerInterface {
         } else {
             System.out.println("Please enter the new price for the item: ");
             double newPrice = in.nextDouble();
-            modify.setPrice(newPrice);
+
+            try {
+                modify.setPrice(newPrice);
+            } catch (NegativeInputException e) {
+                System.out.println("Sorry you cannot sell an item with a negative price.");
+            }
+
             in.nextLine();
             System.out.println("Price of " + modify.getName() + " is now " + newPrice);
         }
@@ -131,7 +138,13 @@ public class OwnerInterface {
         } else {
             System.out.println("Please enter the new quantity for the item: ");
             int newQuantity = in.nextInt();
-            modify.setQuantity(newQuantity);
+
+            try {
+                modify.setQuantity(newQuantity);
+            } catch (NegativeInputException e) {
+                System.out.println("Sorry you cannot create a negative amount of item.");
+            }
+
             in.nextLine();
             System.out.println("Quantity of " + modify.getName() + " is now " + newQuantity);
         }

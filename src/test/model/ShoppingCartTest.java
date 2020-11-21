@@ -1,5 +1,6 @@
 package model;
 
+import model.exception.NegativeInputException;
 import model.item.BakedGoods;
 import model.item.Drinks;
 import org.junit.jupiter.api.BeforeEach;
@@ -37,8 +38,12 @@ public class ShoppingCartTest {
     @Test
     public void testAddItemOutOfStock() {
         // set croissant quantity to 0, the quality was not good!
-        croissant.setQuantity(0);
-        brownSugarMilkTea.setQuantity(0);
+        try {
+            croissant.setQuantity(0);
+            brownSugarMilkTea.setQuantity(0);
+        } catch (NegativeInputException e) {
+            fail("Exception should not have thrown");
+        }
         checkOut.addItem(croissant);
         checkOut.addItem(brownSugarMilkTea);
         assertEquals(0, checkOut.getNumberOfItems());
@@ -65,7 +70,7 @@ public class ShoppingCartTest {
         checkOut.addItem(brownSugarMilkTea);
         checkOut.addItem(brownSugarMilkTea);
 
-        assertEquals(10, checkOut.totalPrice());
+        assertEquals(11.5, checkOut.totalPrice());
         assertEquals(49, croissant.getQuantity());
         assertEquals(18, brownSugarMilkTea.getQuantity());
     }
