@@ -19,3 +19,10 @@ where user can can log in as a customer to add the items into the shopping list 
 ###### Phase 4 Task 2
 - I have chosen to test and design a class in my model package to be robust. 
 - The class Item and its two methods setPrice and setQuantity is redesigned to be robust for the task.
+###### Phase 4 Task 3
+- If I have more time on this project, I would remove the BakedGoods and Drinks class from my project 
+and create an enum interface so that more categories can be created in the future and do not need
+further creation of classes that extends Item
+- Additionally, I would separate MyMenu into two classes since MyMenu is having two functionalities.
+One class for editing the items on the menu and another for returning the items on the menu.
+ 
